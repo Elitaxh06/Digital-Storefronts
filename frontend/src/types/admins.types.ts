@@ -1,3 +1,8 @@
+export type AdminListado = {
+  activos: Admin[],
+  inactivos: Admin[]
+}
+
 export type Admin = {
     id : number,
     nombre: string,
@@ -12,5 +17,5 @@ export type RespuestaApi  = {
   resultadoTipo : string,
   respuestaMensaje: string,
   mensaje : string,
-  datos: Admin[] | ""
+  datos: Admin[] | "" | AdminListado
 }

@@ -2,7 +2,7 @@ import { adminsRoutes } from "../ambientes/admins.routes";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import type { Admin, RespuestaApi } from "../types/types";
+import type { Admin, RespuestaApi } from "../types";
 
 export const getAdmins = async (): Promise<RespuestaApi | null> => {
 
@@ -15,30 +15,41 @@ export const getAdmins = async (): Promise<RespuestaApi | null> => {
                 }
             }
         )
+        if(!data) return null
+
         if(data.resultadoTipo === 'success'){
-            let listaAdmins = data.datos
-            listaAdmins = listaAdmins.map((admin: Admin) => {
-                return {
+            if(Array.isArray(data.datos)) {
+                const listaAdmins = data.datos.map((admin: Admin) => ({
                     ...admin,
                     estado : admin.estado === true ? 'Activo' : 'Inactivo'
+                    
+                }))
+                const adminList = listaAdmins.reduce((acc: { activos: Admin[], inactivos: Admin[] }, admin: Admin) => {
+                    if (admin.estado === 'Activo') {
+                        acc.activos.push(admin)
+                    } else {
+                        acc.inactivos.push(admin)
+                    }
+                    return acc
+                }, {
+                    activos: [],
+                    inactivos: []
+                })
+
+                return {
+                    ...data,
+                    datos: adminList
                 }
-            })
-            const adminList = listaAdmins.reduce((
-                acc: { activos: Admin[], inactivos: Admin[]}, admin: Admin) => {
-                if(admin.estado === 'Activo') {
-                    acc.activos.push(admin)
-                }else if(admin.estado === 'Inactivo') {
-                    acc.inactivos.push(admin)
+            } else{
+                return {
+                    ...data,
+                    datos: {
+                        activos: [],
+                        inactivos: []
+                    }
                 }
-                return acc
-            }, {
-                activos: [],
-                inactivos: []
-            })
-            return {
-                ...data,
-                datos: adminList
             }
+
         }else if(data.resultadoTipo === 'warning'){
             Swal.fire({
                 icon: "warning",

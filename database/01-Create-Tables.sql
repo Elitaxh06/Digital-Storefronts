@@ -34,6 +34,9 @@ create table T_Negocios(
 	constraint fk_admin foreign key (id_admin) references T_Admins(AdminID),
 	constraint fk_categoria foreign key (id_categoria) references T_Categorias(CategoriaID)
 )
+alter table T_Negocios
+add column Nombre VARCHAR(200) not null
+select * from T_Negocios
 
 create table T_Sedes(
 	SedeID SERIAL primary key,

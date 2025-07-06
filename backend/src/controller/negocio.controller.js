@@ -1,27 +1,27 @@
-import { getConnection, adminQuerys } from "../models/index.js"
+import { json } from "stream/consumers";
+import { getConnection, negocioQuerys } from "../models/index.js";
 
 const mensaje = 'Este endpoint devuelve '
-export const listarAdmins = async(req, res) => {
+export const listarNegocios = async(req, res) => {
     try{
         const pool = await getConnection()
-        const dbrows = await pool.query(adminQuerys.listarAdmins)
+        const dbrows = await pool.query(negocioQuerys.listarNegocios)
         const result = dbrows.rows
-        pool.release()
 
-        // CONSTANTES QUE SE REPITEN EN LAS CONIDCIONALES
+        // CONSTANTES QUE SE REPITEN EN LAS CONDICIONALES
         const { msj_texto, msj_tipo } = result[0]
         const respuesta = result[0]
         const mensajeCompletoSuccess = {
             "resultadoTipo" : msj_tipo,
             "respuestaMensaje" : msj_texto,
             "datos" : respuesta,
-            "mensaje" : mensaje + 'la lista de admins'
+            "mensaje" : mensaje + 'la lista de negocios'
         }
         const mensajeCompletoWarningError = {
             "resultadoTipo" : msj_tipo,
             "respuestaMensaje" : msj_texto,
             "datos" : "",
-            "mensaje" : mensaje + 'la lista de admins'
+            "mensaje" : mensaje + 'la lista de negocios'
         }
 
         // DEVOLVER UNA RESPUESTA MAS ELABORADA PARA EL FRONTEND
@@ -33,8 +33,8 @@ export const listarAdmins = async(req, res) => {
             return res.json(mensajeCompletoWarningError)
         }
         return res.json(result[0])
+
     }catch(e) {
-        console.log('Hubo un error en la consulta', e)
-        return res.status(500).send(e)
+        res.status(500).send(json({ mensaje: e }))
     }
 }
