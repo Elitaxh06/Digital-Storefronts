@@ -11,7 +11,7 @@ app.use(cors({
         "http://localhost:5173",
 
         // aqui va la url de donde se va a desplegar el frontend
-        
+        "https://digital-storefronts.vercel.app/"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
