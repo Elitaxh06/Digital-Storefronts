@@ -29,10 +29,10 @@ function CardNegocios() {
         getInitialData()
     }, [])
 
-    if(loading) return <p>Cargando...</p>
+    if(loading) return <p className="">Cargando...</p>
     return (
         <>
-            <div className="">
+            <div className="mt-22">
                 {Array.isArray(negocios?.datos) && negocios.datos.length > 0 ? (
                     <div>
                         {negocios.datos.map((negocio: Negocios ) => (
@@ -57,7 +57,7 @@ function CardNegocios() {
                                         </div>
                                         <p className="mt-4 font-bold text-xl">{negocio.nombre}</p>
                                         <h3 className="text-slate-700">{negocio.description}</h3>
-                                        <button className="bg-orange-600 hover:bg-orange-700 cursor-pointer text-white mt-4 h-10 rounded-lg font-semibold" onClick={() => setShowModal(true)}>Ver mas detalles</button>
+                                        <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer text-white mt-4 h-10 rounded-lg font-semibold" onClick={() => setShowModal(true)}>Ver mas detalles</button>
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@ function CardNegocios() {
                             <div className="flex justify-around gap-1">
                                 <button
                                   
-                                  className="mt-4 px-4 py-2 bg-red-600 text-white rounded cursor-pointer hover:bg-orange-700 w-full"
+                                  className="mt-4 px-4 py-2 bg-orange-500 text-white rounded cursor-pointer hover:bg-orange-600 w-full"
                                   >
                                   Contactar
                                 </button>
