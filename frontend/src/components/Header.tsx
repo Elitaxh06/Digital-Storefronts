@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+// import { useState } from 'react'
 
 function Header() {
-    const [showDevModal, setShowDevModal ] = useState<boolean>(false)
-    const handleRegisterClick = () => {
-        setShowDevModal(true)
-    }
-    const handleContactEmail = () => {
-        window.location.href = 'mailto:pizarroteb06@outlook.com?subject=Registro de Negocio - tiendaticaCR=Hola, me interesa registra mi negocio en tiendaticaCR. Por favor, envienme más información sobre el proceso'
-    }
+    // const [showDevModal, setShowDevModal ] = useState<boolean>(false)
+    // const handleRegisterClick = () => {
+    //     setShowDevModal(true)
+    // }
+    // const handleContactEmail = () => {
+    //     window.location.href = 'mailto:pizarroteb06@outlook.com?subject=Registro de Negocio - tiendaticaCR=Hola, me interesa registra mi negocio en tiendaticaCR. Por favor, envienme más información sobre el proceso'
+    // }
 
   return (
     <header className='flex justify-between items-center py-4 px-12 bg-white border-b '>
@@ -25,7 +25,7 @@ function Header() {
         </nav>
         <div className='flex items-center gap-2'>
             <span className='cursor-pointer hover:bg-slate-200 rounded-lg'>🔍</span>
-            <button className='bg-orange-500 flex items-center justify-center text-white font-semibold rounded-md h-10 w-full p-2 cursor-pointer hover:bg-orange-600 hover:scale-105 transition-transform duration-200' onClick={handleRegisterClick}>Registrar Negocio</button>
+            <button className='bg-orange-500 flex items-center justify-center text-white font-semibold rounded-md h-10 w-full p-2 cursor-pointer hover:bg-orange-600 hover:scale-105 transition-transform duration-200'>Registrar Negocio</button>
         </div>
     </header>
 )
