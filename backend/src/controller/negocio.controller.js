@@ -28,7 +28,7 @@ export const listarNegocios = async(req, res) => {
         if(msj_tipo === 'success') {
             return res.json(mensajeCompletoSuccess)
         }else if(msj_tipo === 'warning') {
-            return res.json(mensajeCompletoSuccess)
+            return res.json(mensajeCompletoWarningError)
         }else if(msj_tipo === 'error') {
             return res.json(mensajeCompletoWarningError)
         }

@@ -18,6 +18,6 @@ export type Negocios = {
 export type RespuestaApiNegocios = {
     resultadoTipo : string,
     respuestaMensaje: string,
-    datos: Negocios[] | "" | NegocioListado,
+    datos: (Negocios | null) | Negocios[] | "" | NegocioListado,
     mensaje: string
 }

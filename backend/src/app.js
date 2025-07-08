@@ -5,7 +5,17 @@ import routes from "./routes/routes.js"
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: [
+        // aqui va la url del frontend en localhost de react con VITE
+        "http://localhost:5173",
+
+        // aqui va la url de donde se va a desplegar el frontend
+        
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}))
 app.use(express.json())
 app.use(morgan("dev"))
 
