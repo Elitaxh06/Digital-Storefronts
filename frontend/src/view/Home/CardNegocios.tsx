@@ -14,22 +14,22 @@ function CardNegocios() {
             id: 2, nombre: "Nails", description: "Salon de belleza", nombre_categoria: "Belleza y Estética", img_url: "https://i.pinimg.com/736x/3f/19/85/3f19851d5205025f8fd403ddf21a9936.jpg", numero: 12343219, redes: "https://facebook.com", mail: 'info@nails.com'
         }
     ]
-    // const getInitialData = async () => {
-    //     try{
-    //         const data = await getNegocios()
-    //         setNegocios(data)
-    //         setLoading(false)
-    //     }catch(e) { 
-    //         console.log('Error al obtener los datos', e)
-    //     }finally{
-    //         setLoading(false)
-    //     }
-    // }
-    // useEffect(() => {
-    //     getInitialData()
-    // }, [])
+    const getInitialData = async () => {
+        try{
+            const data = await getNegocios()
+            setNegocios(data)
+            setLoading(false)
+        }catch(e) { 
+            console.log('Error al obtener los datos', e)
+        }finally{
+            setLoading(false)
+        }
+    }
+    useEffect(() => {
+        getInitialData()
+    }, [])
 
-    if(!loading) return <p>Cargando...</p>
+    if(loading) return <p>Cargando...</p>
     return (
         <>
             <div className="">
