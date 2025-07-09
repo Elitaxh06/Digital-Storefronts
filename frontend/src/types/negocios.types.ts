@@ -7,7 +7,7 @@ export type Negocios = {
     descripcion: string,
     email: string,
     img_url: string,
-    estado: boolean | string,
+    estado: boolean | string | null,
     id_admin: number,
     nombre_categoria: string,
     nombre: string,
@@ -18,6 +18,6 @@ export type Negocios = {
 export type RespuestaApiNegocios = {
     resultadoTipo : string,
     respuestaMensaje: string,
-    datos: (Negocios | null) | Negocios[] | "" | NegocioListado,
+    datos:  Negocios[] | "" | NegocioListado,
     mensaje: string
 }

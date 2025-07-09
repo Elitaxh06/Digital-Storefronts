@@ -17,5 +17,5 @@ export type RespuestaApi  = {
   resultadoTipo : string,
   respuestaMensaje: string,
   mensaje : string,
-  datos: Admin[] | "" | AdminListado
+  datos: Admin[] |"" | AdminListado
 }

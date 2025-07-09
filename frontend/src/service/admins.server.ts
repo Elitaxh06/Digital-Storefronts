@@ -8,7 +8,7 @@ export const getAdmins = async (): Promise<RespuestaApi | null> => {
 
     try{
         const { data } = await axios.get<RespuestaApi | null>(
-            adminsRoutes.getAdmins,
+            adminsRoutes.getAdminsLocal ,
             {
                 headers: {
                     "Content-Type": "application/json"

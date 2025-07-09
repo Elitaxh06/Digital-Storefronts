@@ -12,12 +12,17 @@ returns table(
 language plpgsql
 as $$
 	BEGIN 
-	IF EXISTS (SELECT 1 FROM T_Admins) THEN 
+	IF EXISTS (SELECT 1 FROM t_admins ) THEN 
 		RETURN QUERY
-		SELECT AdminID, Nombre, Email, Fecha_Registro, Estado, Apellidos,
+		SELECT 	t.adminID, 
+				t. nombre, 
+				t.email, 
+				t.fecha_registro, 
+				t.estado, 
+				t.apellidos,
 			'success' AS msj_tipo,
 			'Éxito al realizar la acción' AS msj_texto
-		FROM T_Admins;
+		FROM t_admins t;
 	ELSE
 		RETURN QUERY
 		SELECT 
@@ -36,7 +41,6 @@ as $$
     		NULL::INT, 
     		NULL::VARCHAR, 
     		NULL::VARCHAR,
-    		NULL::VARCHAR,
     		NULL::TIMESTAMP,
     		NULL::BOOLEAN,
 			NULL::VARCHAR,
@@ -47,6 +51,7 @@ $$;
 
 
 select * from fn_listar_admins()
+select * from t_admins 
 
 drop function if exists fn_listar_negocio()
 create or replace function fn_listar_negocio()
