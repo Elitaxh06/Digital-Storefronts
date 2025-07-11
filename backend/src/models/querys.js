@@ -1,5 +1,5 @@
 export const adminQuerys = {
-    listarAdmins : 'select * from fn_listar_admins()',
+    listarAdmins : 'select * from fn_listar_admin()',
     insertarAdmins: 'SELECT * FROM insertar_admin( $1, $2, $3, $4);'
 }
 

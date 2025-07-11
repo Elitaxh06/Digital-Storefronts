@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 function Header() {
     const [ isMobilOpen, setIsMobilOpen ] = useState<boolean>(false)
     const [showDevModal, setShowDevModal ] = useState<boolean>(false)
@@ -17,8 +18,8 @@ function Header() {
         </div>
         <nav>
             <ul className='hidden md:flex space-x-6 gap-3'>
-                <a className='hover:text-orange-500' href="#">Inicio</a>
-                <a className='hover:text-orange-500' href="#">Explorar</a>
+              <Link to="/" className='hover:text-orange-500'>Inicio</Link>
+                <a className='hover:text-orange-500' href="#negocios">Explorar</a>
                 <a className='hover:text-orange-500' href="#">Categorias</a>
                 <a className='hover:text-orange-500' href="#">Contacto</a>
             </ul>

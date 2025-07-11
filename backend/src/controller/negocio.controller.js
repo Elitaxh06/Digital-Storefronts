@@ -1,13 +1,26 @@
-import { json } from "stream/consumers";
-import { getConnection, negocioQuerys } from "../models/index.js";
+import axios from "axios" 
+import dotenv from "dotenv"
 
+// import { getConnection, negocioQuerys } from "../models/index.js";
+
+dotenv.config()
 const mensaje = 'Este endpoint devuelve '
 export const listarNegocios = async(req, res) => {
     try{
-        const pool = await getConnection()
-        const dbrows = await pool.query(negocioQuerys.listarNegocios)
-        const result = dbrows.rows
+       const { data } = await axios.post(
+            `https://nkjrmlgvqcnrknnvufap.supabase.co/rest/v1/rpc/${process.env.URL_GET_NEGOCIOS}`,
+            {},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "apiKey" : process.env.API_KEY,
+                    "Authorization" : `Bearer ${process.env.Authorization}`
+                }
+            }
+       )
 
+       const result = data
+    //    return res.json(result)
         // CONSTANTES QUE SE REPITEN EN LAS CONDICIONALES
         const { msj_texto, msj_tipo } = result[0]
         const respuesta = result

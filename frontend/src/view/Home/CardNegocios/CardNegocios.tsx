@@ -68,7 +68,7 @@ function CardNegocios() {
                         )}
                     </>
                 ) : (
-                    <p>no hay negocios</p>
+                    <h2 className="text-xl text-center font-bold mt-5 pb-10">No hay negocios para mostrar</h2>
                 )}
 
                 {/* MODAL */}

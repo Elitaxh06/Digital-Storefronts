@@ -14,7 +14,7 @@ export default function SectionCards() {
   ];
   return (
     <section className="bg-[#FFFEFD]">
-        <h2 className="text-4xl font-bold text-center pt-14">Descubre Negocios Locales</h2>
+        <h2 className="text-4xl font-bold text-center pt-14" id="negocios">Descubre Negocios Locales</h2>
         <p className="text-center text-slate-600 mt-4 text-lg">Explora una variedad de pequeños negocios que han decidido crecer en línea.<br />Cada uno con su historia única y servicios excepcionales.</p>
         <div className="flex justify-center items-center mt-10 gap-5">
             {categorias.map((cat) => (
