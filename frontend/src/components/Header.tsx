@@ -32,7 +32,7 @@ function Header() {
             className='md:hidden'
             onClick={() => setIsMobilOpen(!isMobilOpen)}
         >
-            {isMobilOpen ? <p className='h-6 w-6'>x</p> : <p className='h-6 w-6'>☰</p>}
+            {isMobilOpen ? <button className='h-6 w-6 cursor-pointer hover:text-orange-500'>X</button> : <button className='h-6 w-6 cursor-pointer hover:text-orange-500'>☰</button>}
         </button>
          {/* Menú móvil */}
         {isMobilOpen && (
