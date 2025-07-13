@@ -6,6 +6,7 @@ export const adminsRoutes: any = {
 export const negociosRoutes: any = {
     // getNegocios : "http://localhost:3000/api/listarNegocios"
     // getNeocios: import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL
+    getNegociosLocal: import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL
 
 }
 

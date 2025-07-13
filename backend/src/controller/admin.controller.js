@@ -1,14 +1,23 @@
-import { getConnection, adminQuerys } from "../models/index.js"
+import axios from "axios"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const mensaje = 'Este endpoint devuelve '
 export const listarAdmins = async(req, res) => {
     try{
-        const pool = await getConnection()
-        const dbrows = await pool.query(adminQuerys.listarAdmins)
-        const result = dbrows.rows
-        
-        pool.release()
-        // return res.json(dbrows)
+        const { data } = await axios.post(
+            process.env.URL_GET_ADMINS,
+            {},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey" : process.env.API_KEY,
+                    "Authorization" : `Bearer ${process.env.Authorization}`
+                }
+            }
+        )
+        const result = data
 
         // CONSTANTES QUE SE REPITEN EN LAS CONIDCIONALES
         const { msj_texto, msj_tipo } = result[0]
@@ -41,17 +50,24 @@ export const listarAdmins = async(req, res) => {
 
 export const insertartAdmins = async(req, res) => {
     try{
-        const { Nombre, Apellido, Email, Estado } = req.body
-        const pool = await getConnection()
-        const dbrows = await pool.query
-        (adminQuerys.insertarAdmins, 
-            [Nombre,Apellido, Email, Estado])
-        const result = dbrows.rows
-        pool.release()
+        const {  p_nombre, p_apellidos, p_email, p_telefono, p_estado } = req.body
+        const { data } = await axios.post(
+            process.env.URL_INSERT_ADMINS,
+            {  p_nombre, p_apellidos, p_email, p_telefono, p_estado },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    apikey : process.env.API_KEY,
+                    Authorization : `Bearer ${process.env.Authorization}`,
+                    Prefer: 'return=representation'
+                }
+            }
+        )
+        const result = data
 
         // CONSTANTES QUE SE REPITEN EN LAS CONIDCIONALES
         const { msj_texto, msj_tipo } = result[0]
-        const respuesta = result[0]
+        const respuesta = result
         const mensajeCompletoSuccess = {
             "resultadoTipo" : msj_tipo,
             "respuestaMensaje" : msj_texto,

@@ -3,7 +3,6 @@ import EmailSVG from "../../../components/SVGS/EmailSVG"
 import TelefonoSVG from "../../../components/SVGS/TelefonoSVG"
 import UbicacionSVG from "../../../components/SVGS/UbicacionSVG"
 import RelojsSVG from "../../../components/SVGS/RelojSVG"
-import NotaAnuncio from "../../../components/NotaAnuncio"
 type TypeContact = {
     logoSvg: React.ReactNode,
     titulo: string,
@@ -86,7 +85,6 @@ function Contacto() {
           </form>
             </div>
         </div>
-        <NotaAnuncio />
     </section>
     )
 }

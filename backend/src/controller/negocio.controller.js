@@ -8,12 +8,12 @@ const mensaje = 'Este endpoint devuelve '
 export const listarNegocios = async(req, res) => {
     try{
        const { data } = await axios.post(
-            `https://nkjrmlgvqcnrknnvufap.supabase.co/rest/v1/rpc/${process.env.URL_GET_NEGOCIOS}`,
+            process.env.URL_GET_NEGOCIOS,
             {},
             {
                 headers: {
                     "Content-Type": "application/json",
-                    "apiKey" : process.env.API_KEY,
+                    "apikey" : process.env.API_KEY,
                     "Authorization" : `Bearer ${process.env.Authorization}`
                 }
             }
@@ -54,17 +54,24 @@ export const listarNegocios = async(req, res) => {
 
 export const insertNegocio = async(req, res) => {
     try{
-        const { Nombre, Descripcion, Email, Img_url, id_admin, id_categoria, Estado } = req.body
-        const pool = await getConnection()
-
-        const dbrows = await pool.query(negocioQuerys.insertNegocio, [Nombre, Descripcion, Email, Img_url, id_admin, id_categoria, Estado])
-        const result = dbrows.rows
-        pool.release()
+        const { p_nombre,p_descripcion,p_email,p_telefono,p_direccion,p_red_social_1,p_red_social_2,p_img_url_1,p_img_url_2,p_img_url_3,p_id_admin,p_id_categoria,p_estado } = req.body
+        const { data } = await axios.post(
+            process.env.URL_INSERT_NEGOCIOS,
+            { p_nombre,p_descripcion,p_email,p_telefono,p_direccion,p_red_social_1,p_red_social_2,p_img_url_1,p_img_url_2,p_img_url_3,p_id_admin,p_id_categoria,p_estado  },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey" : process.env.API_KEY,
+                    "Authorization" : `Bearer ${process.env.Authorization}`
+                }
+            }
+        )
+        const result = data
 
        
         // CONSTANTES QUE SE REPITEN EN LAS CONDICIONALES
         const { msj_texto, msj_tipo } = result[0]
-        const respuesta = result[0]
+        const respuesta = result
         const mensajeCompletoSuccess = {
             "resultadoTipo" : msj_tipo,
             "respuestaMensaje" : msj_texto,
