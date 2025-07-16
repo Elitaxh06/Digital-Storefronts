@@ -48,7 +48,8 @@ export const listarNegocios = async(req, res) => {
         return res.json(result)
 
     }catch(e) {
-        res.status(500).send(json({ mensaje: e }))
+        res.status(500).json({ mensaje: e.message || e.toString() });
+
     }
 }
 
