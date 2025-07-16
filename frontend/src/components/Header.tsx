@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import HamburguerMenuSVG from './SVGS/HamburguerMenuSVG'
+import XSVG from './SVGS/XSVG'
 function Header() {
     const [ isMobilOpen, setIsMobilOpen ] = useState<boolean>(false)
     const [showDevModal, setShowDevModal ] = useState<boolean>(false)
@@ -32,8 +34,16 @@ function Header() {
             className='md:hidden'
             onClick={() => setIsMobilOpen(!isMobilOpen)}
         >
-            {isMobilOpen ? <button className='h-6 w-6 cursor-pointer hover:text-orange-500'>X</button> : <button className='h-6 w-6 cursor-pointer hover:text-orange-500'>☰</button>}
+
+          {isMobilOpen 
+            ? <XSVG />
+            : <HamburguerMenuSVG />
+          }
+            {/* {isMobilOpen ? <button className='cursor-pointer hover:text-orange-500'><XSVG /></button> : <button className=' cursor-pointer'><HamburguerMenuSVG /></button>} */}
         </button>
+
+
+
          {/* Menú móvil */}
         {isMobilOpen && (
           <nav className="md:hidden absolute top-16 left-0 w-full bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-md z-40">
@@ -43,7 +53,7 @@ function Header() {
             <a href="#contacto" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Contacto</a>
             <div className="pt-2">
               <button
-                className="w-full bg-orange-500 text-white font-semibold rounded-md h-10 px-4 py-2 hover:bg-orange-600 transition duration-200"
+                className="w-full cursor-pointer bg-orange-500 text-white font-semibold rounded-md h-10 px-4 py-2 hover:bg-orange-600 transition duration-200"
                 onClick={() => {
                   setIsMobilOpen(false)
                   handleRegisterClick()
@@ -65,7 +75,9 @@ function Header() {
             <div className="flex justify-between items-center ">
                 <br />
                 <h1 className='text-xl font-bold'>🚧 En Desarrollo</h1>
-                <button className='cursor-pointer font-bold' onClick={() => setShowDevModal(false)}>X</button>
+                <button className='cursor-pointer font-bold' onClick={() => setShowDevModal(false)}>
+                    <XSVG />
+                </button>
             </div>
             <p className='mt-2 text-slate-600 text-center'>El registro automático de negocios está en desarrollo.</p>
             <p className='mt-2 text-slate-600 text-center'>Por ahora, para agregar tu negocio a tiendaticaCR, contáctanos directamente:</p>

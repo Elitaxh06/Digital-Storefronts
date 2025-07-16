@@ -1,12 +1,18 @@
 export const adminsRoutes: any = {
-    // getAdmins : import.meta.env.VITE_API_ADMINS_LOCAL_GET_URL
-    // getAdminsLocal: "http://localhost:3000/api/listarAdmins"
+    // LOCAL
+    getAdminsLocal : import.meta.env.VITE_API_ADMINS_LOCAL_GET_URL,
+
+    // PRODUCCION
+    getAdminsProd: import.meta.env.VITE_API_ADMINS_PRODUCCION_GET_URL
 }
 
 export const negociosRoutes: any = {
-    // getNegocios : "http://localhost:3000/api/listarNegocios"
-    // getNeocios: import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL
-    getNegociosLocal: import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL
+    // LOCAL
+    getNegociosLocal: import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL,
+
+    // PRODUCCION
+    getNegociosProd : import.meta.env.VITE_API_NEGOCIOS_PRODUCCION_GET_URL
+
 
 }
 

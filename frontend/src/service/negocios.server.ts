@@ -8,7 +8,7 @@ import { negociosRoutes } from "../ambientes/admins.routes";
 
 export const getNegocios = async (): Promise<RespuestaApiNegocios | null> => {
     const { data } = await axios.get<RespuestaApiNegocios | null>(
-        negociosRoutes.getNegociosLocal,
+        negociosRoutes.getNegociosProd,
         {
             headers: {
                 "Content-Type": "application/json"

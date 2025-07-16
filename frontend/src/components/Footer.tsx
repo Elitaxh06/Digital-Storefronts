@@ -1,7 +1,10 @@
+import FadeInSection from "./FadeInSection"
 function Footer() {
     return (
         <footer className="bg-gray-900 text-white ">
             <div className="grid grid-cols lg:grid-cols-4 md:grid-cols-2 gap-6 ml-5 mr-5 pt-10 pb-10">
+                <FadeInSection direction="right" delay={0.5}>
+
                 <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"           className="lucide lucide-globe h-8 w-8 text-orange-600"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></          path></svg>
@@ -14,7 +17,10 @@ function Footer() {
                     </div>
                     
                 </div>
+                </FadeInSection>
                 <div>
+                    <FadeInSection direction="up" delay={0.5}>
+
                     <h2>Enlaces Rápidos</h2>
                     <ul className="text-slate-400 flex flex-col gap-1.5">
                         <li className="mt-2"><a className="hover:text-orange-400" href="#">Inicio</a></li>
@@ -22,8 +28,11 @@ function Footer() {
                         <li><a className="hover:text-orange-400" href="#">Categorias</a></li>
                         <li><a className="hover:text-orange-400" href="#">Contacto</a></li>
                     </ul>
+                    </FadeInSection>
                 </div>
                 <div>
+                    <FadeInSection direction="up" delay={0.5}>
+
                     <h2>Categorías Populares</h2>
                     <ul className="text-slate-400 flex flex-col gap-1.5">
                         <li className="mt-1"><a className="hover:text-orange-400" href="#">Restaurante</a></li>
@@ -32,14 +41,19 @@ function Footer() {
                         <li><a className="hover:text-orange-400" href="#">Educación y Cursos</a></li>
                         <li><a className="hover:text-orange-400" href="#">Tecnología</a></li>
                     </ul>
+                    </FadeInSection>
+
                 </div>
                 <div>
+                    <FadeInSection direction="left" delay={0.5}>
+
                     <h2>Contacto</h2>
                     <ul className="text-slate-400 flex flex-col gap-1.5">
                         <li className="mt-1"><a className="hover:text-orange-400" href="#">contacto@tiendaticacr.com</a></li>
                         <li><a href="#" className="hover:text-orange-400">+506 83745488</a></li>
                         <li><a href="#" className="hover:text-orange-400">San José, Costa Rica</a></li>
                     </ul>
+                    </FadeInSection>
                 </div>
             </div>
         </footer>

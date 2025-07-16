@@ -3,6 +3,7 @@ import EmailSVG from "../../../components/SVGS/EmailSVG"
 import TelefonoSVG from "../../../components/SVGS/TelefonoSVG"
 import UbicacionSVG from "../../../components/SVGS/UbicacionSVG"
 import RelojsSVG from "../../../components/SVGS/RelojSVG"
+import FadeInSection from "../../../components/FadeInSection"
 type TypeContact = {
     logoSvg: React.ReactNode,
     titulo: string,
@@ -13,6 +14,8 @@ type TypeContact = {
 
 const CardsContacto = ({logoSvg, titulo, texto, esLink, styleLogos}: TypeContact) => {
     return (
+      <FadeInSection direction="right" delay={0.5}>
+
         <div className="">
             <div className="flex items-start gap-4 p-2 border border-slate-300 rounded-xl mt-4">
                 <span className={`${styleLogos} p-3 rounded-full`}>{logoSvg}</span>
@@ -22,6 +25,7 @@ const CardsContacto = ({logoSvg, titulo, texto, esLink, styleLogos}: TypeContact
                 </div>
             </div>
         </div>
+      </FadeInSection>
     )
 }
 export default CardsContacto
@@ -29,6 +33,8 @@ export default CardsContacto
 function Contacto() {
   return (
     <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center">
+        <FadeInSection direction="left" delay={0.5}>
+
         <h1 className="text-4xl font-bold">Contáctanos</h1>
         
         <p className="text-slate-600 mt-4">Si tienes preguntas o necesitas ayuda, contáctanos a través de nuestro formulario de contacto.</p>
@@ -85,6 +91,8 @@ function Contacto() {
           </form>
             </div>
         </div>
+        </FadeInSection>
+
     </section>
     )
 }
