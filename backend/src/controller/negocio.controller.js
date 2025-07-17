@@ -7,6 +7,10 @@ dotenv.config()
 const mensaje = 'Este endpoint devuelve '
 export const listarNegocios = async(req, res) => {
     try{
+        // console.log('URL:', process.env.URL_GET_NEGOCIOS);
+        // console.log('API KEY:', process.env.API_KEY);
+        // console.log('Authorization:', process.env.Authorization);
+        // console.log('Entro en el try del controller')
        const { data } = await axios.post(
             process.env.URL_GET_NEGOCIOS,
             {},
@@ -20,7 +24,8 @@ export const listarNegocios = async(req, res) => {
        )
 
        const result = data
-    //    return res.json(result)
+
+    //    return res.json(data)
         // CONSTANTES QUE SE REPITEN EN LAS CONDICIONALES
         const { msj_texto, msj_tipo } = result[0]
         const respuesta = result
@@ -48,6 +53,7 @@ export const listarNegocios = async(req, res) => {
         return res.json(result)
 
     }catch(e) {
+        console.error('Error en listarNegocios:', e);
         res.status(500).json({ mensaje: e.message || e.toString() });
 
     }

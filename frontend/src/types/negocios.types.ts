@@ -1,8 +1,8 @@
-export type NegocioListado = {
-    activos: Negocios[],
-    inactivos: Negocios[]
+export type ListBusiness = {
+    activos: Business[],
+    inactivos: Business[]
 }
-export type Negocios = {
+export type Business = {
     id: number;
     nombre: string;
     descripcion: string;
@@ -21,9 +21,9 @@ export type Negocios = {
     msj_texto: string;
 }   
 
-export type RespuestaApiNegocios = {
+export type ApiResponseBusiness = {
     resultadoTipo : string,
     respuestaMensaje: string,
-    datos:  Negocios[] | "" | NegocioListado,
+    datos:  Business[] | "" | ListBusiness,
     mensaje: string
 }

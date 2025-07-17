@@ -1,14 +1,14 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import type{ 
-    Negocios,
-    RespuestaApiNegocios
+    Business,
+    ApiResponseBusiness
 } from "../types"
 import { negociosRoutes } from "../ambientes/admins.routes";
 
-export const getNegocios = async (): Promise<RespuestaApiNegocios | null> => {
-    const { data } = await axios.get<RespuestaApiNegocios | null>(
-        negociosRoutes.getNegociosProd,
+export const getNegocios = async (): Promise<ApiResponseBusiness | null> => {
+    const { data } = await axios.get<ApiResponseBusiness | null>(
+        negociosRoutes.getNegociosLocal,
         {
             headers: {
                 "Content-Type": "application/json"
@@ -19,17 +19,17 @@ export const getNegocios = async (): Promise<RespuestaApiNegocios | null> => {
     try{
         if(data.resultadoTipo === 'success'){
             if(Array.isArray(data.datos)){
-                const listNegocios = data.datos.map((negocio: Negocios) => {
+                const listBusiness = data.datos.map((business: Business) => {
                     return {
-                        ...negocio,
-                        estado : negocio.estado === true ? 'Activo' : 'Inactivo'
+                        ...business,
+                        estado : business.estado === true ? 'Activo' : 'Inactivo'
                     }
                 })
-                const negocioList = listNegocios.reduce((acc: { activos: Negocios[], inactivos: Negocios[]}, negocio: Negocios) => {
-                    if(negocio.estado === 'Activo'){
-                        acc.activos.push(negocio)
+                const negocioList = listBusiness.reduce((acc: { activos: Business[], inactivos: Business[]}, business: Business) => {
+                    if(business.estado === 'Activo'){
+                        acc.activos.push(business)
                     }else{
-                        acc.inactivos.push(negocio)
+                        acc.inactivos.push(business)
                     }
                     return acc
                 }, {

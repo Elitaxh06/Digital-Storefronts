@@ -12,6 +12,8 @@ function Header() {
         window.location.href = 'mailto:pizarroteb06@outlook.com?subject=Registro de Negocio - tiendaticaCR=Hola, me interesa registra mi negocio en tiendaticaCR. Por favor, envienme más información sobre el proceso'
     }
 
+    
+
   return (
     <header className='flex justify-between items-center py-4 px-12 bg-white fixed border-b border-slate-200 top-0 left-0 right-0 z-40'>
         <div className='flex items-center gap-2'>
@@ -22,8 +24,8 @@ function Header() {
             <ul className='hidden md:flex space-x-6 gap-3'>
               <Link to="/" className='hover:text-orange-500'>Inicio</Link>
                 <a className='hover:text-orange-500' href="#negocios">Explorar</a>
-                <a className='hover:text-orange-500' href="#">Categorias</a>
-                <a className='hover:text-orange-500' href="#">Contacto</a>
+                <a className='hover:text-orange-500' href="#tunegocio">Tu Negocio</a>
+                <a className='hover:text-orange-500' href="#contacto">Contacto</a>
             </ul>
         </nav>
         <div className='hidden md:flex items-center gap-2'>
@@ -47,9 +49,9 @@ function Header() {
          {/* Menú móvil */}
         {isMobilOpen && (
           <nav className="md:hidden absolute top-16 left-0 w-full bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-md z-40">
-            <a href="#explorar" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Explorar</a>
-            <a href="#categorias" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Categorías</a>
-            <a href="#negocios" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Para Negocios</a>
+            <a href="#inicio" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Inicio</a>
+            <a href="#negocios" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Explorar</a>
+            <a href="#tunegocio" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Tu Negocio</a>
             <a href="#contacto" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Contacto</a>
             <div className="pt-2">
               <button

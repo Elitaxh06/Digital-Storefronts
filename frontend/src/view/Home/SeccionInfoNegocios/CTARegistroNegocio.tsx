@@ -30,7 +30,7 @@ export default CardsCTA
 
 function CTARegistrarNegocio() {
     return (
-        <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center">
+        <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center" id="tunegocio">
             <FadeInSection>
                 <h1 className="text-4xl font-bold">¿Tienes un Negocio?</h1>
                 <p className="text-slate-600 mt-4">Únete a tiendaticaCR y lleva tu negocio al mundo digital. Te ayudamos a conectar con más clientes y hacer crecer tu emprendimiento.</p>

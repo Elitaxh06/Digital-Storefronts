@@ -1,4 +1,4 @@
-export type AdminListado = {
+export type ListAdmins = {
   activos: Admin[],
   inactivos: Admin[]
 }
@@ -13,9 +13,9 @@ export type Admin = {
     msj_tipo : string,
     msj_texto : string,
 }
-export type RespuestaApi  = {
+export type ApiResponseAdmins  = {
   resultadoTipo : string,
   respuestaMensaje: string,
   mensaje : string,
-  datos: Admin[] |"" | AdminListado
+  datos: Admin[] |"" | ListAdmins
 }

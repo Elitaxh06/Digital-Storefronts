@@ -1,4 +1,4 @@
-import NotaAnuncio from "../../../components/NotaAnuncio"
+import NotaAnuncio from "../../../components/AddNote"
 import FadeInSection from "../../../components/FadeInSection"
 function Hero() {
   return (

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react"
-import { esNegocio } from "../../../utils/typeGurdsReadAdmins"
-import type { Negocios, RespuestaApiNegocios } from "../../../types"
+import { esNegocio } from "../../../utils/typeGurdsRead"
+import type { Business, ApiResponseBusiness } from "../../../types"
 import FacebookSVG from "../../../components/SVGS/FacebookSVG"
 import InstagramSVG from "../../../components/SVGS/InstagramSVG"
 import { getNegocios } from "../../../service/negocios.server"
 import FadeInSection from "../../../components/FadeInSection"
 import XSVG from "../../../components/SVGS/XSVG"
 function CardNegocios() {
-    const [negocios, setNegocios ] = useState<RespuestaApiNegocios | null>(null)
+    const [business, setBusiness ] = useState<ApiResponseBusiness | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-    const [showModal, setShowModal ] = useState<Negocios | null>(null)
+    const [showModal, setShowModal ] = useState<Business | null>(null)
     const [mostratCantidad, setMostartCantidad] = useState<number>(3)
     const cargarMas = () => {
         setMostartCantidad((prev) => prev + 3)
@@ -22,7 +22,7 @@ function CardNegocios() {
     const getInitialData = async () => {
         try{
             const data = await getNegocios()
-            setNegocios(data)
+            setBusiness(data)
             setLoading(false)
         }catch(e) { 
             console.log('Error al obtener los datos', e)
@@ -33,41 +33,41 @@ function CardNegocios() {
     useEffect(() => {
         getInitialData()
     }, [])
-    // console.log('Datos de negocios:', negocios.datos?.activos);
+    // console.log('Datos de business:', business.datos?.activos);
 
     if(loading) return <h2 className="text-xl text-center font-bold mt-10 pb-10">Cargando...</h2>
     return (
         <>
             
             <div className="mt-22 bg-slate-[#FFFAF5]">
-                {negocios?.datos && esNegocio(negocios.datos) ? (
+                {business?.datos && esNegocio(business.datos) ? (
 
                     <>
                     <FadeInSection direction="down" delay={0.5}>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  mx-2 my-4 rounded-lg gap-6 gap-y-6 ml-10 mr-10">
-                        {negocios.datos.activos.slice(0, mostratCantidad).map((negocio: Negocios) => (
-                            <div key={negocio.id} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2  transition-transform duration-200 hover:text-orange-500">
+                        {business.datos.activos.slice(0, mostratCantidad).map((business: Business) => (
+                            <div key={business.id} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2  transition-transform duration-200 hover:text-orange-500">
                                     <div className="flex flex-col">
                                         <div className="relative">
-                                            <img src={negocio.img_url_1} alt="Imagen de la tienda" className="object-cover h-48 rounded-t-lg w-full" />
+                                            <img src={business.img_url_1} alt="Imagen de la tienda" className="object-cover h-48 rounded-t-lg w-full" />
                                             <div className="absolute inset-0 bg- bg-opacity-50 flex justify-start items-start">
-                                                <p className="bg-slate-200 text-black text-sm rounded-xl py-1 px-2">{negocio.nombre_categoria}</p>
+                                                <p className="bg-slate-200 text-black text-sm rounded-xl py-1 px-2">{business.nombre_categoria}</p>
                                             </div>
                                         </div>
-                                        <p className="mt-4 font-bold text-xl">{negocio.nombre}</p>    
-                                        <p className="text-slate-600 mt-3">Emprendimiento presentado por {negocio.nombre_admin}</p>
-                                        <h3 className="text-slate-700 flex-grow mt-3 line-clamp-1 desc">{negocio.descripcion}</h3>
-                                        <p className="flex items-center text-slate-500 mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin h-4 w-4 mr-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>{negocio.direccion}</p>
+                                        <p className="mt-4 font-bold text-xl">{business.nombre}</p>    
+                                        <p className="text-slate-600 mt-3">Emprendimiento presentado por {business.nombre_admin}</p>
+                                        <h3 className="text-slate-700 flex-grow mt-3 line-clamp-1 desc">{business.descripcion}</h3>
+                                        <p className="flex items-center text-slate-500 mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin h-4 w-4 mr-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>{business.direccion}</p>
                                         <div className="flex justify-center">  
-                                            <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer hover:scale-105 w-[90%] transition-transform duration-200 text-white h-10 rounded-lg font-semibold mt-5" onClick={() => setShowModal(negocio)}>Ver mas detalles</button>
+                                            <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer hover:scale-105 w-[90%] transition-transform duration-200 text-white h-10 rounded-lg font-semibold mt-5" onClick={() => setShowModal(business)}>Ver mas detalles</button>
                                         </div>
                                 </div>
                             </div>
 
-))}
+                        ))}
                     </div>
-                        {mostratCantidad < negocios.datos.activos.length ?(
+                        {mostratCantidad < business.datos.activos.length ?(
                             <div className="flex items-center justify-center">
                                 <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer text-white p-3 rounded-lg font-semibold mt-5 mb-5" onClick={cargarMas}>
                                     Cargar mas
@@ -83,7 +83,7 @@ function CardNegocios() {
                         </FadeInSection>
                     </>
                 ) : (
-                    <h2 className="text-xl text-center font-bold mt-5 pb-10">No hay negocios para mostrar</h2>
+                    <h2 className="text-xl text-center font-bold mt-5 pb-10">No hay business para mostrar</h2>
                 )}
 
                 {/* MODAL */}

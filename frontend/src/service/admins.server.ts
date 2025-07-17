@@ -2,12 +2,12 @@ import { adminsRoutes } from "../ambientes/admins.routes";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import type { Admin, RespuestaApi } from "../types";
+import type { Admin, ApiResponseAdmins } from "../types";
 
-export const getAdmins = async (): Promise<RespuestaApi | null> => {
+export const getAdmins = async (): Promise<ApiResponseAdmins | null> => {
 
     try{
-        const { data } = await axios.get<RespuestaApi | null>(
+        const { data } = await axios.get<ApiResponseAdmins | null>(
             adminsRoutes.getAdminsLocal ,
             {
                 headers: {

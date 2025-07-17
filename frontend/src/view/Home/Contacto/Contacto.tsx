@@ -32,7 +32,7 @@ export default CardsContacto
 
 function Contacto() {
   return (
-    <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center">
+    <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center" id="contacto">
         <FadeInSection direction="left" delay={0.5}>
 
         <h1 className="text-4xl font-bold">Contáctanos</h1>
