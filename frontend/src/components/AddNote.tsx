@@ -26,7 +26,7 @@ export default function NotaAnuncio() {
               className="inline-flex items-center justify-center px-4 py-2 border border-orange-200 font-medium rounded-md hover:bg-orange-100 transition text-sm"
             >
               <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  stroke-linejoin="round" className="lucide lucide-mail h-3 w-3 mr-1"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2  7"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  strokeLinejoin="round" className="lucide lucide-mail h-3 w-3 mr-1"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2  7"></path></svg>
                 </span> 
               Contactanos
             </a>
@@ -35,7 +35,7 @@ export default function NotaAnuncio() {
               className="inline-flex items-center justify-center px-4 py-2 bg-orange-600 text-white font-medium rounded-md hover:bg-orange-700 transition text-sm"
             >
                 <span className="text-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  stroke-linejoin="round" className="lucide lucide-external-link h-3 w-3 mr-1"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0     0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  strokeLinejoin="round" className="lucide lucide-external-link h-3 w-3 mr-1"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0     0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                         </span>
               Solicitarla aquí
             </a>
