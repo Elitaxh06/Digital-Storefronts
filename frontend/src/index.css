@@ -3,5 +3,9 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  background-color: #FDE8DA;
+  /* background-color: #FDE8DA; */
+  /* background-color: #F8FEFA; */
+  background: linear-gradient(to bottom, #F0FBF7, #F3F8FF);
+
+  
 }

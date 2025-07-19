@@ -16,10 +16,10 @@ type TypeCTA = {
 const CardsCTA = ({logoSvg, titulo, texto, style}: TypeCTA) => {
     return (
         <FadeInSection direction="right" delay={0.5}>   
-            <div className="flex flex-col items-center gap-2 pt-3">
+            <div className="flex flex-col items-center gap-2 pt-3 group">
 
-                <span className={`${style} p-4 rounded-full`}>{logoSvg}</span>
-                <h4 className="text-xl font-semibold">{titulo}</h4>
+                <span className={`${style} group-hover:scale-110 transition-transform duration-200 p-4 rounded-full group-hover:shadow-xl`}>{logoSvg}</span>
+                <h4 className="text-xl font-semibold group-hover:text-orange-400">{titulo}</h4>
                 <p className="text-gray-600">{texto}</p>
             </div>
         </FadeInSection>
@@ -32,8 +32,8 @@ function CTARegistrarNegocio() {
     return (
         <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center" id="tunegocio">
             <FadeInSection>
-                <h1 className="text-4xl font-bold">¿Tienes un Negocio?</h1>
-                <p className="text-slate-600 mt-4">Únete a tiendaticaCR y lleva tu negocio al mundo digital. Te ayudamos a conectar con más clientes y hacer crecer tu emprendimiento.</p>
+                <h1 className="text-5xl font-bold">¿Tienes un Negocio?</h1>
+                <p className="text-slate-600 text-lg mt-4">Únete a tiendaticaCR y lleva tu negocio al mundo digital. Te ayudamos a conectar con más clientes y hacer crecer tu emprendimiento.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-8">
                     <CardsCTA logoSvg={<TiendaSVG />} titulo="Presencia Online" texto="Crea tu perfil digital y muestra tus productos o servicios" style="bg-orange-200"/>
                     <CardsCTA logoSvg={<ClientesSVG />} titulo="Más Clientes" texto="Conecta con nuevos clientes en tu comunidad"                  style="bg-pink-200"/>
@@ -41,7 +41,7 @@ function CTARegistrarNegocio() {
                     <CardsCTA logoSvg={<ApoyoSVG />} titulo="Apoyo Local" texto="Forma parte de una comunidad que apoya lo local"                  style="bg-purple-300"/>
 
                 </div>
-                <button className="bg-orange-600 text-white rounded-md px-6 py-3 mt-8 cursor-pointer hover:bg-orange-700 font-semibold">
+                <button className="bg-orange-600 text-white rounded-md px-6 py-3 mt-8 cursor-pointer hover:bg-orange-700 font-semibold hover:scale-105 transition-transform duration-200">
                    Registrar mi Negocio
                 </button>
                 <p className="text-slate-600 text-center mt-2">Contáctanos para más información</p>

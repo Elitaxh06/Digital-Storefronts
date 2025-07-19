@@ -16,14 +16,12 @@ const CardsContacto = ({logoSvg, titulo, texto, esLink, styleLogos}: TypeContact
     return (
       <FadeInSection direction="right" delay={0.5}>
 
-        <div className="">
-            <div className="flex items-start gap-4 p-2 border border-slate-300 rounded-xl mt-4">
+        <div className="hover:-translate-y-1 transition-transform duration-200 hover:shadow-lg flex items-start gap-2 p-5 border border-slate-300 rounded-xl">
                 <span className={`${styleLogos} p-3 rounded-full`}>{logoSvg}</span>
                 <div className="flex flex-col items-start">
                     <h4 className="text-xl font-semibold">{titulo}</h4>
                     {esLink ? <a href={texto} target="_blank" rel="noreferrer" className=' text-blue-600 hover:underline'>{texto}</a> : <p className='text-gray-600'>{texto}</p>}
                 </div>
-            </div>
         </div>
       </FadeInSection>
     )
@@ -35,18 +33,18 @@ function Contacto() {
     <section className="bg-slate-50 py-16 px-4 md:px-12 lg:px-24 shadow-md text-center" id="contacto">
         <FadeInSection direction="left" delay={0.5}>
 
-        <h1 className="text-4xl font-bold">Contáctanos</h1>
+        <h1 className="text-5xl font-bold">Contáctanos</h1>
         
-        <p className="text-slate-600 mt-4">Si tienes preguntas o necesitas ayuda, contáctanos a través de nuestro formulario de contacto.</p>
+        <p className="text-slate-600 text-xl mt-4">¿Tienes preguntas? ¿Quieres registrar tu negocio? ¡Estamos aquí para ayudarte!</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-10 gap-y-10 mt-10 items-start">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
                 <CardsContacto logoSvg={<EmailSVG />} titulo="Email" texto="contacto@tiendaticacr.com" esLink={true}                          styleLogos="bg-orange-200"/>
                 <CardsContacto logoSvg={<TelefonoSVG />} titulo="Teléfono" texto="+506 83745488"       esLink={false}                         styleLogos="bg-green-200"/>
                 <CardsContacto logoSvg={<UbicacionSVG />} titulo="Ubicación" texto="San José, Costa Rica" esLink={false} styleLogos="bg-blue-200"/>
                 <CardsContacto logoSvg={<RelojsSVG />} titulo="Horario de Atención" texto="Lunes a Viernes: 8:00 AM - 6:00 PM" esLink={false} styleLogos="bg-purple-300"/>
             </div>
-            <div className="bg-white shadow-md rounded-xl p-6">
+            <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg">
                 <h4 className="text-2xl font-semibold mb-4">Envíanos un Mensaje</h4>
                 <form className="flex flex-col gap-4">
                 <div className="flex flex-col text-left">

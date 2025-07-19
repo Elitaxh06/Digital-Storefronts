@@ -47,7 +47,7 @@ function CardNegocios() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  mx-2 my-4 rounded-lg gap-6 gap-y-6 ml-10 mr-10">
                         {business.datos.activos.slice(0, mostratCantidad).map((business: Business) => (
-                            <div key={business.id} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2  transition-transform duration-200 hover:text-orange-500">
+                            <div key={business.id} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2 hover:shadow-2xl transition-transform duration-200 hover:text-orange-500">
                                     <div className="flex flex-col">
                                         <div className="relative">
                                             <img src={business.img_url_1} alt="Imagen de la tienda" className="object-cover h-48 rounded-t-lg w-full" />
