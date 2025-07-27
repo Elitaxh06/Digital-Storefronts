@@ -1,6 +1,7 @@
 import supabase from "../../Lib/SupabaseClient";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { showInfoAlert } from "../../helpers/Swal/InfoAlertSwal";
 
 function Register(){
     const [email, setEmail] = useState("")
@@ -19,7 +20,7 @@ function Register(){
 
         const phoneRegex = /^[0-9]{8}$/ 
         if(!phoneRegex.test(phoneNumber)){
-            setMessage("El teléfono debe contener solo numeros y debe ser de 8 dígitos.")
+            showInfoAlert("El número de teléfono debe tener exactamente 8 dígitos.", "info")   
             return
         }
         const { data, error } = await supabase.auth.signUp({
@@ -33,7 +34,8 @@ function Register(){
             }
         })
         if(error){
-            setMessage(error.message);
+            showInfoAlert(error.message, "info")
+            // setMessage(error.message);
             return;
         }
         if(data){
@@ -45,7 +47,7 @@ function Register(){
     }
     return(
         <section className="mt-24 mb-22">
-            <h2 className="text-center font-bold text-3xl">Registrar</h2>
+            <h2 className="text-center font-bold text-3xl">Crear Cuenta</h2>
             {message && (
                 <div className="flex justify-center my-5">
                     <span className="text-center font-semibold text-xl">{message}</span>

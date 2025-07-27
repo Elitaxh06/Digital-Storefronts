@@ -1,6 +1,6 @@
 // type Ambientes = "Local" | "Produccion";
 
-// let ambienteActual: Ambientes = "Local";
+// let ambienteActual: Ambientes = "Local"; // Cambiar a "Produccion" según sea necesario
 // let urlNegocios = ""
 
 // switch(ambienteActual){

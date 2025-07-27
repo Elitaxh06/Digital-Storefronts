@@ -6,6 +6,8 @@ function Wrapper({children}: any) {
   const[authenticated, setAuthenticated ] = useState(false)
   const [loading, setLoading ] = useState(true)
 
+  
+
   useEffect(() => {
 
     const getSession = async() => {
@@ -27,7 +29,7 @@ function Wrapper({children}: any) {
     }
   }
 
-  return <Navigate to="/login"/>
+  return <Navigate to="/register"/>
 }
 
 

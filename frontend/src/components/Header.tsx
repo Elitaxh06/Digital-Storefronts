@@ -78,13 +78,19 @@ function Header() {
 
             <div className="flex justify-between items-center ">
                 <br />
-                <h1 className='text-xl font-bold'>🚧 En Desarrollo</h1>
+                <h1 className='text-xl font-bold'>🚀Añadir mi negocio</h1>
                 <button className='cursor-pointer font-bold' onClick={() => setShowDevModal(false)}>
                     <XSVG />
                 </button>
             </div>
-            <p className='mt-2 text-slate-600 text-center'>El registro automático de negocios está en desarrollo.</p>
-            <p className='mt-2 text-slate-600 text-center'>Por ahora, para agregar tu negocio a tiendaticaCR, contáctanos directamente:</p>
+            <p className='mt-2 text-slate-600 text-center py-2'>Para registrar tu negocio debes tener una cuenta en tiendaticaCR. Si ya tienes una, puedes ir directamente al dashboard, de lo contrario, crea una cuenta para comenzar.</p>
+            <p className='pb-2 text-blue-400 text-center flex items-center justify-center gap-2'>
+              <Link to="/dashboard" className="text-blue-500 hover:text-blue-600 font-semibold" onClick={() => setShowDevModal(false)}>
+                Ir al Dashboard
+              </Link>
+              
+            </p>
+            <p className='mt-2 text-slate-600 text-center'>📩 ¿Tienes dudas?</p>
             <button className="cursor-pointer bg-orange-500 w-full h-10 mt-3 mb-2 text-white rounded-lg hover:bg-orange-600 font-semibold" onClick={handleContactEmail}>Contactar por email</button>
             <span className='text-center text-slate-600'>prueba@gmail.com</span>
             </div>
