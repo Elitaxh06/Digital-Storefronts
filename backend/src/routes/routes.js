@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { 
     listarAdmins,
-    insertartAdmins
+    insertartAdmins,
+    listarAdminsById
  } from "../controller/admin.controller.js";
 
 import {
@@ -14,6 +15,8 @@ const routes = Router()
 // RUTAS PARA ADMINS
 routes.get("/listarAdmins", listarAdmins)
 routes.post("/insertarAdmins", insertartAdmins)
+routes.get("/listarAdmins/:id", listarAdminsById)
+
 
 // ************************************************************************
 // RUTAS PARA NEGOCIOS
