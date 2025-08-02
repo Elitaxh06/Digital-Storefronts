@@ -3,6 +3,7 @@ create or replace function insertar_admin(
   p_apellidos varchar,
   p_email varchar,
   p_telefono int,
+  p_id_usuario_supabase uuid,
   p_estado boolean default true
 )
 returns table(
@@ -17,8 +18,8 @@ begin
     return;
   end if;
   begin
-    insert into t_admins (Nombre, Apellidos, Email, Telefono, Estado)
-    values(p_nombre, p_apellidos, p_email, p_telefono, p_estado);
+    insert into t_admins (Nombre, Apellidos, Email, Telefono, Estado, id_usuario_supabase)
+    values(p_nombre, p_apellidos, p_email, p_telefono, p_estado, p_id_usuario_supabase);
     return query
       select 'success', 'Admin insertado correctamente.';
       return;

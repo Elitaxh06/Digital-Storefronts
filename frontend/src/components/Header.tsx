@@ -55,8 +55,7 @@ function Header() {
             <Link to="/login" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Iniciar Sesión</Link>
             <a href="#contacto" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Contacto</a>
             <div className="pt-2">
-              <Link
-                to="/dashboard"
+              <button
                 className="w-full cursor-pointer bg-orange-500 text-white font-semibold rounded-md h-10 px-4 py-2 hover:bg-orange-600 transition duration-200"
                 onClick={() => {
                   setIsMobilOpen(false)
@@ -64,7 +63,7 @@ function Header() {
                 }}
               >
                 Registrar Negocio
-              </Link>
+              </button>
             </div>
           </nav>
         )}

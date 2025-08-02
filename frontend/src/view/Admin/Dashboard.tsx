@@ -1,13 +1,10 @@
-import { useState } from "react"
 import supabase from "../../Lib/SupabaseClient"
 
 import { useNavigate } from "react-router-dom"
+import RegisterAdmin from "./RegisterAdmin"
 
 
 function Dashboard(){
-    const [fullName, setFullName] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
-    const [phone, setPhone] = useState<string>("")
     const navigate = useNavigate()
     const signOut = async () => {
         const { error } = await supabase.auth.signOut()
@@ -45,53 +42,7 @@ function Dashboard(){
           <div className="bg-black h-1 rounded w-1/3"></div>
         </div>
 
-        <form  className="bg-white shadow-xl rounded-lg p-8 w-full max-w-2xl">
-          <h2 className="text-xl font-semibold text-blue-700 mb-6">📇 Información Personal</h2>
-          <p className="text-sm text-gray-600 mb-4">Cuéntanos sobre ti como propietario</p>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Tu Nombre Completo *</label>
-            <input
-              type="text"
-              placeholder="Ej: Juan Pérez"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Correo Electrónico *</label>
-            <input
-              type="email"
-              placeholder="Ej: juan@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-sm font-medium mb-1">Teléfono *</label>
-            <input
-              type="tel"
-              placeholder="Ej: +52 55 1234 5678"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          <div className="flex justify-between items-center">
-            <button type="button" className="bg-gray-200 text-gray-700 px-4 py-2 rounded">◀ Anterior</button>
-            <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-              Siguiente →
-            </button>
-          </div>
-        </form>
+        <RegisterAdmin />
 
         <div className="mt-10 bg-blue-100 border border-blue-300 text-blue-800 p-4 rounded max-w-2xl">
           <strong>¿Necesitas ayuda?</strong><br />

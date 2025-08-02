@@ -7,6 +7,7 @@ returns table(
   telefono int,
   fecha_registro timestamp,
   estado boolean,
+	id_usuario_supabase UUID,
   msj_tipo TEXT,
   msj_texto text
 )
@@ -22,6 +23,7 @@ as $$
             t.telefono,
             t.fecha_registro,
             t.estado,
+						t.id_usuario_supabase,
             'success' as msj_tipo,
             'Exito al realizar la accion' as msj_texto
         From t_admins t;
@@ -35,6 +37,7 @@ as $$
         NULL::INT,
 			  NULL::TIMESTAMP,
 			  NULL::BOOLEAN,
+				NULL::uuid,
 			  'warning' AS msj_tipo,
 			  'Actualmente no hay administradores registrados.' AS msj_texto;
     END if;
@@ -48,10 +51,12 @@ as $$
           NULL::INT,
 			    NULL::TIMESTAMP,
 			    NULL::BOOLEAN,
+					NULL::uuid,
 			    'error' AS msj_tipo,
 			    sqlerrm AS msj_texto;
     end
 $$
+DROP FUNCTION fn_listar_admin()
 
 select * from fn_listar_admin()
 

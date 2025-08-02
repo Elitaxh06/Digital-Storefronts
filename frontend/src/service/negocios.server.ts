@@ -9,7 +9,7 @@ import { negociosRoutes } from "../ambientes/admins.routes";
 export const getNegocios = async (): Promise<ApiResponseBusiness | null> => {
     try{
         const { data } = await axios.get<ApiResponseBusiness | null>(
-            negociosRoutes.getNegociosProd,
+            negociosRoutes.VITE_BUSSINESS_PROD_URL,
             // negociosRoutes.getNegociosLocal,
             {
                 headers: {

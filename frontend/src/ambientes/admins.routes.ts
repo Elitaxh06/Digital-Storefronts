@@ -20,16 +20,20 @@ export const adminsRoutes: any = {
     // LOCAL
     getAdminsLocal : import.meta.env.VITE_API_ADMINS_LOCAL_GET_URL,
 
+    getAdminsByIdLocal: import.meta.env.VITE_API_ADMINS_LOCAL_GET_WITH_ID_URL,
+
     // PRODUCCION
-    getAdminsProd: import.meta.env.VITE_API_ADMINS_PRODUCCION_GET_URL
+    getAdminsProd: import.meta.env.VITE_ADMINS_PROD_URL,
+
+    insertAdminsLocal: import.meta.env.VITE_API_ADMINS_LOCAL_INSERT_URL,
 }
 
 export const negociosRoutes: any = {
     // LOCAL
-    getNegociosLocal: import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL,
+    getNegociosLocal: import.meta.env.VITE_BUSSINES_LOCAL_URL,
 
     // PRODUCCION
-    getNegociosProd : import.meta.env.VITE_API_NEGOCIOS_PRODUCCION_GET_URL
+    getNegociosProd : import.meta.env.VITE_BUSSINESS_PROD_URL
 
 
 }
