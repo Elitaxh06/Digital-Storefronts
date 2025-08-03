@@ -13,6 +13,7 @@ export type Admin = {
     apellidos : string,
     msj_tipo : string,
     msj_texto : string,
+    adminid: number
 }
 export type ApiResponseAdmins  = {
   resultadoTipo : string,

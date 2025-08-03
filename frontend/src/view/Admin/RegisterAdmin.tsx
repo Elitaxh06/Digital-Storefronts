@@ -3,11 +3,14 @@ import { insertAdmin } from '../../service/admins.server';
 import Swal from 'sweetalert2';
 import { showInfoAlert } from '../../helpers/Swal/InfoAlertSwal';
 import supabase from '../../Lib/SupabaseClient';
+import { useNavigate } from 'react-router-dom';
 export default function RegisterAdmin() {
     const [nombre, setNombre] = useState<string>("");
     const [apellidos, setApellidos] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [telefono, setTelefono] = useState<string>("");
+
+    const navigate = useNavigate()
     
     const insertAdminHandler = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -84,7 +87,7 @@ export default function RegisterAdmin() {
             <label className="block text-sm font-medium mb-1">Tu Nombre *</label>
             <input
               type="text"
-              placeholder="Ej: Juan Pérez"
+              placeholder="Ej: Juan"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -95,7 +98,7 @@ export default function RegisterAdmin() {
             <label className="block text-sm font-medium mb-1">Tus Apellidos *</label>
             <input
               type="text"
-              placeholder="Ej: Juan Pérez"
+              placeholder="Ej: Pérez Castro"
               value={apellidos}
               onChange={(e) => setApellidos(e.target.value)}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -119,7 +122,7 @@ export default function RegisterAdmin() {
             <label className="block text-sm font-medium mb-1">Teléfono *</label>
             <input
               type="tel"
-              placeholder="Ej: +52 55 1234 5678"
+              placeholder="Ej: 88888888"
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -128,8 +131,8 @@ export default function RegisterAdmin() {
           </div>
 
           <div className="flex justify-between items-center">
-            <button type="button" className="bg-gray-200 text-gray-700 px-4 py-2 rounded">◀ Anterior</button>
-            <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+            <button type="button" className="bg-gray-200 text-gray-700 px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/')}>◀ Anterior</button>
+            <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                 Agregar Administrador
             </button>
           </div>

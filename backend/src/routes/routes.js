@@ -2,7 +2,8 @@ import { Router } from "express";
 import { 
     listarAdmins,
     insertartAdmins,
-    listarAdminsById
+    listarAdminsById,
+    obtenerAdminIdPorUid
  } from "../controller/admin.controller.js";
 
 import {
@@ -16,6 +17,8 @@ const routes = Router()
 routes.get("/listarAdmins", listarAdmins)
 routes.post("/insertarAdmins", insertartAdmins)
 routes.get("/listarAdmins/:id", listarAdminsById)
+
+routes.get("/obtenerAdminIdPorUid/:uid", obtenerAdminIdPorUid)
 
 
 // ************************************************************************

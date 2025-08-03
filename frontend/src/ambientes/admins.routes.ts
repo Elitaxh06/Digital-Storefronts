@@ -1,20 +1,3 @@
-// type Ambientes = "Local" | "Produccion";
-
-// let ambienteActual: Ambientes = "Local"; // Cambiar a "Produccion" según sea necesario
-// let urlNegocios = ""
-
-// switch(ambienteActual){
-//     case "Local":
-//         urlNegocios = import.meta.env.VITE_API_NEGOCIOS_LOCAL_GET_URL;
-//         break;
-//     case "Produccion":
-//         urlNegocios = import.meta.env.VITE_API_NEGOCIOS_PRODUCCION_GET_URL;
-//         break;
-//     default:
-//         urlNegocios = import.meta.env.VITE_API_NEGOCIOS_PRODUCCION_GET_URL;
-//         break;
-// }
-
 
 export const adminsRoutes: any = {
     // LOCAL
@@ -22,10 +5,20 @@ export const adminsRoutes: any = {
 
     getAdminsByIdLocal: import.meta.env.VITE_API_ADMINS_LOCAL_GET_WITH_ID_URL,
 
+    getAdminsByUidLocal: import.meta.env.VITE_API_ADMINS_POR_ID_URL,
+    
+    insertAdminsLocal: import.meta.env.VITE_API_ADMINS_LOCAL_INSERT_URL,
+
+
     // PRODUCCION
     getAdminsProd: import.meta.env.VITE_ADMINS_PROD_URL,
 
-    insertAdminsLocal: import.meta.env.VITE_API_ADMINS_LOCAL_INSERT_URL,
+    getAdminsByIdProd: import.meta.env.VITE_API_ADMINS_PROD_GET_WITH_ID_URL,
+
+    getAdminsByUidProd: import.meta.env.VITE_API_ADMINS_POR_ID_URL_PROD,
+
+    insertAdmisProd: import.meta.env.VITE_API_ADMINS_PROD_INSERT_URL
+
 }
 
 export const negociosRoutes: any = {

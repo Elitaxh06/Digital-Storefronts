@@ -101,7 +101,8 @@ export const insertAdmin = async ({
     const telefonoParseado = Number(telefono);
     try{
         const { data } = await axios.post<ApiResponseAdmins | null>(
-            adminsRoutes.insertAdminsLocal,
+            // adminsRoutes.insertAdminsLocal,
+            adminsRoutes.insertAdmisProd,
             {
                 p_nombre: nombre,
                 p_apellidos: apellidos,
@@ -160,7 +161,8 @@ export const insertAdmin = async ({
 export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins | null> => {
     try{
         const { data } = await axios.get<ApiResponseAdmins | null>(
-            adminsRoutes.getAdminsByIdLocal + id_admin,
+            // adminsRoutes.getAdminsByIdLocal + id_admin,
+            adminsRoutes.getAdminsByIdProd + id_admin,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -172,8 +174,8 @@ export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins
         if(data.resultadoTipo === 'success'){
             Swal.fire({
                 icon: "success",
-                title: "Administrador encontrado",
-                text: data.respuestaMensaje
+                title: "Bienvenido",
+                text: "Acceso al panel de administrador"
             })
             return data
         }else if(data.resultadoTipo === 'warning'){
@@ -200,6 +202,53 @@ export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins
             text: "Error al obtener los datos del administrador"
         })
         console.log('Error al obtener los datos del administrador', e)
+        return null
+    }
+}
+
+
+export const getAdminsByUid = async (uid: string): Promise<ApiResponseAdmins | null> => {
+    try{
+        const { data } = await axios.get<ApiResponseAdmins | null>(
+            // adminsRoutes.getAdminsByUidLocal + uid,
+            adminsRoutes.getAdminsByUidProd + uid,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+
+        if(data?.resultadoTipo === 'success'){
+            // Swal.fire({
+            //     icon: "success",
+            //     title: "Administrador encontrado",
+            //     text: data.respuestaMensaje
+            // })
+            return data
+        }else if(data?.resultadoTipo === 'warning'){
+            Swal.fire({
+                icon: "warning",
+                title: "Para su informacion",
+                text: 'No se encontró un administrador asociado a su cuenta, Por favor, verifica tu cuenta o contacta al soporte.'
+            })
+            return data
+        }else if(data?.resultadoTipo === 'error'){
+            Swal.fire({
+                icon: "error",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }
+        return data || null
+    }catch(e){
+        Swal.fire({
+            icon: "error",
+            title: "Para su informacion",
+            text: "Error al obtener los datos del administrador por UID"
+        })
+        console.log('Error al obtener los datos del administrador por UID', e)
         return null
     }
 }
