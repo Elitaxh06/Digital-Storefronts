@@ -29,9 +29,14 @@ Muchos comercios locales no tienen visibilidad digital por falta de recursos. Es
 ✅ Registro e inicio de sesión para dueños de negocio  
 ✅ Creación y edición de negocios  
 ✅ Cada negocio tiene:
-- Imagen destacada
+- Nombre
 - Descripción
+- Imagenes destacadas
 - Enlaces a redes o sitio web
+- Dirección
+- Telefono
+- Categoría
+- El nombre del dueño
 
 ✅ Ranking de los negocios por popularidad
 ✅ Vista pública tipo catálogo para mostrar todos los negocios  
@@ -41,11 +46,10 @@ Muchos comercios locales no tienen visibilidad digital por falta de recursos. Es
 
 ## 🧪 Estructura del proyecto
 
-├── backend/ # API REST con Express y PostgreSQL
-├── frontend/ # Vista en React + Redux
-├── db/ # Scripts SQL para estructura de la base de datos
+├── backend/ # API REST con Express
+├── frontend/ # Vista en React con TypeScript y Redux para gestión de estado
+├── db/ # Scripts y PostgreSQL para estructura de la base de datos
 ├── README.md
-├── .env.example
 
 ---
 
@@ -67,7 +71,13 @@ Este proyecto está bajo la siguiente licencia:
 
 ## ✅ Estado del proyecto
 
-- CRUD: solo está el Read  
+- CRUD: 
+    Create (Insertar negocio) ✅
+    Read (Listar negocios) ✅
+    Update (Editar negocio) en desarrollo 🔧
+    Delete pendiente ❌
+
+- Facturación: en desarrollo 🔧
 - Base de datos: funcional  
-- Backend: funcional en localhost  
-- Frontend: organizando flujo de datos 
+- Backend: funcional en produccion 🚀
+- Frontend: completo excepto la edición de negocios y la facturación

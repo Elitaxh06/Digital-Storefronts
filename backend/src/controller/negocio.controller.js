@@ -18,7 +18,6 @@ export const listarNegocios = async(req, res) => {
                 }
             }
        )
-       console.log('Respuesta de Supabase:', data);
 
        const result = data
 
