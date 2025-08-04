@@ -9,8 +9,8 @@ import { negociosRoutes } from "../ambientes/admins.routes";
 export const getNegocios = async (): Promise<ApiResponseBusiness | null> => {
     try{
         const { data } = await axios.get<ApiResponseBusiness | null>(
-            negociosRoutes.getNegociosProd,
-            // negociosRoutes.getNegociosLocal,
+            // negociosRoutes.getNegociosProd,
+            negociosRoutes.getNegociosLocal,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -73,6 +73,92 @@ export const getNegocios = async (): Promise<ApiResponseBusiness | null> => {
             icon: "info",
             title: "Para su informacion",
             text: "Error al obtener los datos de los negocios. Por favor, refresque la pagína o intente más tarde"
+        })
+        return null
+    }
+}
+
+type BussinessInsertData = {
+    nombre: string,
+    descripcion: string,
+    email: string,
+    telefono: string,
+    direccion: string,
+    redSocial1: string,
+    redSocial2: string,
+    imgUrl1: string,
+    imgUrl2: string,
+    imgUrl3: string,
+    idAdmin: number,
+    idCategoria: string,
+    estado: boolean
+}
+
+export const insertBussiness = async ({
+    nombre,
+    descripcion,
+    email,
+    telefono,
+    direccion,
+    redSocial1,
+    redSocial2,
+    imgUrl1,
+    imgUrl2,
+    imgUrl3,
+    idAdmin: idAdmin,
+    idCategoria,
+    estado
+}: BussinessInsertData): Promise<ApiResponseBusiness | null> => {
+    const telefonoParseado = Number(telefono)
+    const idCategoriaParseado = Number(idCategoria)
+    try{
+        const { data } = await axios.post<ApiResponseBusiness | null>(
+            negociosRoutes.insertNegociosLocal,
+            {
+                p_nombre: nombre,
+                p_descripcion: descripcion,
+                p_email: email,
+                p_telefono: telefonoParseado,
+                p_direccion: direccion,
+                p_red_social_1: redSocial1,
+                p_red_social_2: redSocial2,
+                p_img_url_1: imgUrl1,
+                p_img_url_2: imgUrl2,
+                p_img_url_3: imgUrl3,
+                p_id_admin: idAdmin,
+                p_id_categoria: idCategoriaParseado,
+                p_estado: estado
+            },
+        )
+        if(!data) return null
+        if(data.resultadoTipo === 'success'){
+            Swal.fire({
+                icon: "success",
+                title: "Para su informacion",
+                text: "El negocio ha sido insertado exitosamente"
+            })
+            return data
+        }else if(data.resultadoTipo === 'warning'){
+            Swal.fire({
+                icon: "warning",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }else if(data.resultadoTipo === 'error'){
+            Swal.fire({
+                icon: "error",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }
+        return null
+    }catch(e){
+        Swal.fire({
+            icon: "info",
+            title: "Para su informacion",
+            text: "Error al insertar el negocio. Por favor, refresque la pagína o intente más tarde"
         })
         return null
     }

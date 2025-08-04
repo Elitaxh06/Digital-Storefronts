@@ -26,8 +26,9 @@ export const negociosRoutes: any = {
     getNegociosLocal: import.meta.env.VITE_BUSSINES_LOCAL_URL,
 
     // PRODUCCION
-    getNegociosProd : import.meta.env.VITE_BUSSINESS_PROD_URL
+    getNegociosProd : import.meta.env.VITE_BUSSINESS_PROD_URL,
 
+    insertNegociosLocal: import.meta.env.VITE_BUSSINESS_LOCAL_INSERT_URL,
 
 }
 

@@ -101,8 +101,8 @@ export const insertAdmin = async ({
     const telefonoParseado = Number(telefono);
     try{
         const { data } = await axios.post<ApiResponseAdmins | null>(
-            // adminsRoutes.insertAdminsLocal,
-            adminsRoutes.insertAdmisProd,
+            adminsRoutes.insertAdminsLocal,
+            // adminsRoutes.insertAdmisProd,
             {
                 p_nombre: nombre,
                 p_apellidos: apellidos,
@@ -161,8 +161,8 @@ export const insertAdmin = async ({
 export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins | null> => {
     try{
         const { data } = await axios.get<ApiResponseAdmins | null>(
-            // adminsRoutes.getAdminsByIdLocal + id_admin,
-            adminsRoutes.getAdminsByIdProd + id_admin,
+            adminsRoutes.getAdminsByIdLocal + id_admin,
+            // adminsRoutes.getAdminsByIdProd + id_admin,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -172,11 +172,11 @@ export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins
         if(!data) return null
 
         if(data.resultadoTipo === 'success'){
-            Swal.fire({
-                icon: "success",
-                title: "Bienvenido",
-                text: "Acceso al panel de administrador"
-            })
+            // Swal.fire({
+            //     icon: "success",
+            //     title: "Bienvenido",
+            //     text: "Acceso al panel de administrador"
+            // })
             return data
         }else if(data.resultadoTipo === 'warning'){
             Swal.fire({ 
@@ -210,8 +210,8 @@ export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins
 export const getAdminsByUid = async (uid: string): Promise<ApiResponseAdmins | null> => {
     try{
         const { data } = await axios.get<ApiResponseAdmins | null>(
-            // adminsRoutes.getAdminsByUidLocal + uid,
-            adminsRoutes.getAdminsByUidProd + uid,
+            adminsRoutes.getAdminsByUidLocal + uid,
+            // adminsRoutes.getAdminsByUidProd + uid,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -220,11 +220,7 @@ export const getAdminsByUid = async (uid: string): Promise<ApiResponseAdmins | n
         )
 
         if(data?.resultadoTipo === 'success'){
-            // Swal.fire({
-            //     icon: "success",
-            //     title: "Administrador encontrado",
-            //     text: data.respuestaMensaje
-            // })
+            
             return data
         }else if(data?.resultadoTipo === 'warning'){
             Swal.fire({
