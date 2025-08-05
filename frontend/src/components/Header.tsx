@@ -25,7 +25,7 @@ function Header() {
               <Link to="/" className='hover:text-orange-500'>Inicio</Link>
                 <a className='hover:text-orange-500' href="#negocios">Explorar</a>
                 <a className='hover:text-orange-500' href="#contacto">Contacto</a>
-                <Link to="/login" className='hover:text-orange-500'>Iniciar Sesion</Link>
+                <Link to="/dashboard" className='hover:text-orange-500'>Panel de Administrador</Link>
                 
             </ul>
         </nav>
@@ -52,7 +52,7 @@ function Header() {
           <nav className="md:hidden absolute top-16 left-0 w-full bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-md z-40">
             <Link to="/" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Inicio</Link>
             <a href="#negocios" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Explorar</a>
-            <Link to="/login" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Iniciar Sesión</Link>
+            <Link to="/dashboard" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Panel de Administrador</Link>
             <a href="#contacto" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Contacto</a>
             <div className="pt-2">
               <button
@@ -82,16 +82,17 @@ function Header() {
                     <XSVG />
                 </button>
             </div>
-            <p className='mt-2 text-slate-600 text-center py-2'>Para registrar tu negocio debes tener una cuenta en tiendaticaCR. Si ya tienes una, puedes ir directamente al dashboard, de lo contrario, crea una cuenta para comenzar.</p>
-            <p className='pb-2 text-blue-400 text-center flex items-center justify-center gap-2'>
-              <Link to="/dashboard" className="text-blue-500 hover:text-blue-600 font-semibold" onClick={() => setShowDevModal(false)}>
-                Ir al Dashboard
-              </Link>
+            <p className='mt-2 text-slate-600 text-center py-2'>Para registrar tu negocio debes tener una cuenta en tiendaticaCR. Si ya tienes una, puedes ir directamente al panel de administrador, de lo contrario, crea una cuenta para comenzar.</p>
               
-            </p>
             <p className='mt-2 text-slate-600 text-center'>📩 ¿Tienes dudas?</p>
-            <button className="cursor-pointer bg-orange-500 w-full h-10 mt-3 mb-2 text-white rounded-lg hover:bg-orange-600 font-semibold" onClick={handleContactEmail}>Contactar por email</button>
+            <button className="text-blue-500 font-semibold cursor-pointer hover:text-blue-600" onClick={handleContactEmail}>Contactar por email</button>
             <span className='text-center text-slate-600'>prueba@gmail.com</span>
+            
+            <p className=' text-blue-400 text-center flex items-center justify-center gap-2'>
+              <Link to="/dashboard" className="cursor-pointer flex items-center justify-center bg-orange-500 w-full h-10 mt-3 mb-2 text-white rounded-lg hover:bg-orange-600 font-semibold" onClick={() => setShowDevModal(false)}>
+                Ir al Panel de Administrador
+              </Link>
+            </p>
             </div>
                 </div>  
         </>

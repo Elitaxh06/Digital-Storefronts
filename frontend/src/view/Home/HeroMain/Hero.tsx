@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import NotaAnuncio from "../../../components/AddNote"
 import FadeInSection from "../../../components/FadeInSection"
 import { HouseSVG, Star } from "../../../components/SVGS/HouseSVG"
@@ -21,7 +22,10 @@ function Hero() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right ml-2 h-5 w-5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </span>
             </a>
-            <button className="border border-green-700 hover:bg-green-100 hover:text-black cursor-pointer hover:shadow-lg hover:scale-105 transition-transform duration-200 text-green-700 py-3 px-18 rounded-md font-semibold">Registar mi Negocio</button>
+            <Link to="/dashboard" className="border border-green-700 hover:bg-green-100 hover:text-black cursor-pointer hover:shadow-lg hover:scale-105 transition-transform duration-200 text-green-700 py-3 px-18 rounded-md font-semibold">
+                Registar mi Negocio
+            </Link>
+
         </div>
         <FadeInSection direction="right" delay={0.5}>
 

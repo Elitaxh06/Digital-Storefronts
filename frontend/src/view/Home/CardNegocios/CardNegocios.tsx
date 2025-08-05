@@ -6,6 +6,7 @@ import InstagramSVG from "../../../components/SVGS/InstagramSVG"
 import { getNegocios } from "../../../service/negocios.server"
 import FadeInSection from "../../../components/FadeInSection"
 import XSVG from "../../../components/SVGS/XSVG"
+import "./CardNegocios.css"
 function CardNegocios() {
     const [business, setBusiness ] = useState<ApiResponseBusiness | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
@@ -31,11 +32,27 @@ function CardNegocios() {
         }
     }
     useEffect(() => {
-        getInitialData()
+        setTimeout(() => {
+            getInitialData()
+        }, 4000)
     }, [])
     // console.log('Datos de business:', business.datos?.activos);
 
-    if(loading) return <h2 className="text-xl text-center font-bold mt-10 pb-10">Cargando...</h2>
+    if(loading) return (
+        <div className="card flex items-center justify-center my-8">
+            <div className="loader">
+              <p className="font-semibold">Cargando</p>
+              <div className="words">
+                <span className="word">Detalles</span>
+                <span className="word">Negocios</span>
+                <span className="word">Categoría</span>
+                <span className="word">Información</span>
+                <span className="word">Ubicación</span>
+              </div>
+            </div>
+        </div>
+
+    )
     return (
         <>
             

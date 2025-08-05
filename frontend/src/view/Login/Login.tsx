@@ -17,7 +17,7 @@ function Login(){
             password: password
         })
         if(error){
-            showInfoAlert(error.message, "info")
+            showInfoAlert(error.message, "error")
             // setMessage(error.message)
             setEmail("")
             setPassword("")
@@ -32,11 +32,6 @@ function Login(){
     return(
         <section className="mt-24 mb-18 px-4">
             <h3 className="text-center font-bold text-3xl">Login</h3>
-            {/* {message && (
-                <div className="flex justify-center my-3">
-                    <span className="font-semibold text-center text-xl">{message}</span>
-                </div>
-            )} */}
             <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="relative z-0 w-full mb-5 group">
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder=" " name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />

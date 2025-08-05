@@ -29,7 +29,7 @@ function Wrapper({children}: any) {
     }
   }
 
-  return <Navigate to="/register"/>
+  return <Navigate to="/login"/>
 }
 
 

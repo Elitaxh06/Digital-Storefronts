@@ -172,11 +172,11 @@ export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins
         if(!data) return null
 
         if(data.resultadoTipo === 'success'){
-            // Swal.fire({
-            //     icon: "success",
-            //     title: "Bienvenido",
-            //     text: "Acceso al panel de administrador"
-            // })
+            Swal.fire({
+                icon: "success",
+                title: "Bienvenido",
+                text: "Acceso al panel de administrador"
+            })
             return data
         }else if(data.resultadoTipo === 'warning'){
             Swal.fire({ 

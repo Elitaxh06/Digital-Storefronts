@@ -11,6 +11,12 @@ export default function RegisterAdmin() {
     const [telefono, setTelefono] = useState<string>("");
 
     const navigate = useNavigate()
+    const signOut = async () => {
+        const { error } = await supabase.auth.signOut()
+        if(error) throw error
+        navigate("/")
+    }
+
     
     const insertAdminHandler = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -78,7 +84,7 @@ export default function RegisterAdmin() {
         }
     }   
   return (
-    <section>
+    <section className='flex flex-col items-center justify-center'>
         <form  className="bg-white shadow-xl rounded-lg p-8 w-full max-w-2xl" onSubmit={insertAdminHandler}>
           <h2 className="text-xl font-semibold text-blue-700 mb-6">📇 Información Personal</h2>
           <p className="text-sm text-gray-600 mb-4">Cuéntanos sobre ti como propietario</p>
@@ -131,7 +137,7 @@ export default function RegisterAdmin() {
           </div>
 
           <div className="flex justify-between items-center">
-            <button type="button" className="bg-gray-200 text-gray-700 px-4 py-2 rounded cursor-pointer" onClick={() => navigate('/')}>◀ Anterior</button>
+            <button type="button" className="bg-gray-200 text-gray-700 px-4 py-2 rounded cursor-pointer" onClick={() => signOut()}>◀ Cerrar Sesión</button>
             <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 cursor-pointer">
                 Agregar Administrador
             </button>

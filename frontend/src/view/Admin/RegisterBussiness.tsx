@@ -12,8 +12,8 @@ type Props = {
 export default function RegisterBussiness({admin, modo, setModo}: Props) {
 
   return (
-    <section className='mt-5 flex items-center justify-center'>
-        <div className='w-[80%] bg-white'>
+    <section className='flex items-center justify-center'>
+        <div className='w-[80%] bg-white py-4'>
             {modo === 'ver' ? (
             <div className='flex flex-col items-center justify-center'>
                 <span className='pt-2'>

@@ -58,7 +58,7 @@ function Dashboard(){
       }
     setTimeout(() => {  
       fetchAdminByUid()   
-    }, 500)
+    }, 400)
 
     }, [])
 

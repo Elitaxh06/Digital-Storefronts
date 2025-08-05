@@ -102,7 +102,7 @@ export default function FormAddBussiness({admin}: Props) {
           <p className="text-sm text-gray-600 mb-4">Información básico sobre tu negocio</p>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Tu Nombre *</label>
+            <label className="block text-sm font-medium mb-1">Nombre *</label>
             <input
               type="text"
               placeholder="Ej: Mi Cafeteria"
@@ -113,7 +113,7 @@ export default function FormAddBussiness({admin}: Props) {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Tus Apellidos *</label>
+            <label className="block text-sm font-medium mb-1">Descripción *</label>
             <input
               type="text"
               placeholder="Ej: Negocio con los mejores cafés de Costa Rica..."
