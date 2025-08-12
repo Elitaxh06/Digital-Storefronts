@@ -19,7 +19,7 @@ export const getAdmins = async (): Promise<ApiResponseAdmins | null> => {
 
     try{
         const { data } = await axios.get<ApiResponseAdmins | null>(
-            adminsRoutes.VITE_API_ADMINS_LOCAL_GET_URL,
+            adminsRoutes.getAdmins,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -101,8 +101,7 @@ export const insertAdmin = async ({
     const telefonoParseado = Number(telefono);
     try{
         const { data } = await axios.post<ApiResponseAdmins | null>(
-            // adminsRoutes.insertAdminsLocal,
-            adminsRoutes.insertAdmisProd,
+            adminsRoutes.insertAdmin,
             {
                 p_nombre: nombre,
                 p_apellidos: apellidos,
@@ -161,8 +160,7 @@ export const insertAdmin = async ({
 export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins | null> => {
     try{
         const { data } = await axios.get<ApiResponseAdmins | null>(
-            // adminsRoutes.getAdminsByIdLocal + id_admin,
-            adminsRoutes.getAdminsByIdProd + id_admin,
+            adminsRoutes.getAdminsById + id_admin,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -210,8 +208,7 @@ export const getAdminsById = async (id_admin: number): Promise<ApiResponseAdmins
 export const getAdminsByUid = async (uid: string): Promise<ApiResponseAdmins | null> => {
     try{
         const { data } = await axios.get<ApiResponseAdmins | null>(
-            // adminsRoutes.getAdminsByUidLocal + uid,
-            adminsRoutes.getAdminsByUidProd + uid,
+            adminsRoutes.getAdminsByIdUid + uid,
             {
                 headers: {
                     "Content-Type": "application/json"

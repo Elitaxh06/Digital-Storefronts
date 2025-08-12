@@ -32,9 +32,7 @@ function CardNegocios() {
         }
     }
     useEffect(() => {
-        setTimeout(() => {
-            getInitialData()
-        }, 4000)
+        getInitialData()
     }, [])
     // console.log('Datos de business:', business.datos?.activos);
 
@@ -100,7 +98,7 @@ function CardNegocios() {
                         </FadeInSection>
                     </>
                 ) : (
-                    <h2 className="text-xl text-center font-bold mt-5 pb-10">No hay business para mostrar</h2>
+                    <h2 className="text-xl text-center font-bold mt-5 pb-10">No hay negocios para mostrar</h2>
                 )}
 
                 {/* MODAL */}

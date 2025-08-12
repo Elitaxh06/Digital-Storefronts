@@ -9,8 +9,7 @@ import { negociosRoutes } from "../ambientes/admins.routes";
 export const getNegocios = async (): Promise<ApiResponseBusiness | null> => {
     try{
         const { data } = await axios.get<ApiResponseBusiness | null>(
-            negociosRoutes.getNegociosProd,
-            // negociosRoutes.getNegociosLocal,
+            negociosRoutes.getNegocios,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -113,7 +112,7 @@ export const insertBussiness = async ({
     const idCategoriaParseado = Number(idCategoria)
     try{
         const { data } = await axios.post<ApiResponseBusiness | null>(
-            negociosRoutes.insertNegociosLocal,
+            negociosRoutes.insertNegocio,
             {
                 p_nombre: nombre,
                 p_descripcion: descripcion,
