@@ -3,10 +3,12 @@ export type ListBusiness = {
     inactivos: Business[]
 }
 export type Business = {
-    id: number;
+    negocioid ?: number;
+    id ? : number
     nombre: string;
     descripcion: string;
     email: string;
+    telefono: number | string;
     direccion: string;
     red_social_1: string;
     red_social_2: string;

@@ -5,7 +5,7 @@ import type { Admin } from '../../types';
 import { getAdminsByUid } from '../../service/admins.server';
 import RegisterAdmin from "./RegisterAdmin"
 import HeaderDashboard from "./HeaderDashboard"
-import Loader from "../../components/Loader";
+import Loader from "../../components/Loaders/Loader";
 import RegisterBussiness from "./RegisterBussiness";
 
 type Modo = 'ver' | 'agregar'
@@ -56,10 +56,9 @@ function Dashboard(){
           // faltaria hacer una validacion si los admins estan acivos[] o inactivos[] 
           setLoading(false)
       }
-    setTimeout(() => {  
-      fetchAdminByUid()   
-    }, 400)
+  
 
+      fetchAdminByUid()   
     }, [])
 
     if(loading) return(<><Loader /></>)
@@ -68,14 +67,13 @@ function Dashboard(){
           {admin ? (
             <>
               <HeaderDashboard admin={admin} setModo={setModo} modo={modo}/>
+              {/* <NegoiosByIdAdmin id_admin={admin.adminid} /> */}
               <RegisterBussiness admin={admin} modo={modo} setModo={setModo}/>
-              
             </>
             
           ): (
             <RegisterAdmin />
           )}
-
 
         </section>
     )

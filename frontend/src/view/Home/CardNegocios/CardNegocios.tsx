@@ -62,7 +62,7 @@ function CardNegocios() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  mx-2 my-4 rounded-lg gap-6 gap-y-6 ml-10 mr-10">
                         {business.datos.activos.slice(0, mostratCantidad).map((business: Business) => (
-                            <div key={business.id} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2 hover:shadow-2xl transition-transform duration-200 hover:text-orange-500">
+                            <div key={business.id ?? business.negocioid} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2 hover:shadow-2xl transition-transform duration-200 hover:text-orange-500">
                                     <div className="flex flex-col">
                                         <div className="relative">
                                             <img src={business.img_url_1} alt="Imagen de la tienda" className="object-cover h-48 rounded-t-lg w-full" />
@@ -153,6 +153,8 @@ function CardNegocios() {
                                         <p className="text-slate-700 flex gap-2 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin h-5 w-5 text-orange-600"><path d="M20  10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>{showModal.direccion}</p>
 
                                         <a href={`mailto:${showModal.email}`} target="_blank" className="mt-1 text-slate-700 flex gap-2 items-center hover:text-orange-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail h-5 w-5 text-orange-600"><rect width="20"    height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>{showModal.email}</a>
+
+                                        <a href={`tel:${showModal.telefono}`} className="mt-1 text-slate-700 flex gap-2 items-center hover:text-orange-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone h-5 w-5 text-orange-600"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.13 1.21.37 2.39.7 3.5a2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.58-1.58a2 2 0 0    1 2.11-.45c1.11.33 2.29.57    3.5.7a2    2    0    0    1    1.72    2Z"></path></svg>{showModal.telefono}</a>
                                     </div>
 
                                     {/* seccion de redes sociales  */}

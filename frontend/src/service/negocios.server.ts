@@ -162,3 +162,94 @@ export const insertBussiness = async ({
         return null
     }
 }
+
+export const getNegociosByIdAdmin = async (idAdmin: number): Promise<ApiResponseBusiness | null> => {
+    try{
+        const { data } = await axios.get<ApiResponseBusiness | null>(
+            negociosRoutes.getNegociosByIdAdmin + idAdmin,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+                
+            }
+        )
+        if(!data) return null
+         if(data.resultadoTipo === 'success'){
+            return data
+        }else if(data.resultadoTipo === 'warning'){
+            Swal.fire({
+                icon: "info",
+                title: "Para su informacion",
+                text: "No se encontraron datos de negocios asociados a su cuenta. Por favor, refresque la pagína o intente más tarde"
+            })
+            return data
+            // return data
+        }else if(data.resultadoTipo === 'error'){
+            Swal.fire({
+                icon: "info",
+                title: "Para su informacion",
+                text: "Error al obtener los datos de los negocios por ID de administrador. Por favor, refresque la pagína o intente más tarde"
+                // text: data.respuestaMensaje
+            })
+            return data
+        }
+        return null
+    }catch(e){
+        Swal.fire({
+            icon: "info",
+            title: "Para su informacion",
+            text: "Error al obtener los datos de los negocios por ID de administrador. Por favor, refresque la pagína o intente más tarde"
+        })
+        return null
+    }
+}
+
+export const updateLogicalBusiness = async ({id, estado}: {id: number, estado: boolean}): Promise<ApiResponseBusiness | null> => {
+    try{
+        const { data } = await axios.post<ApiResponseBusiness | null>(
+            negociosRoutes.updateLogical,
+            {
+                id,
+                estado,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+        // debugger
+        if(!data) return null
+        if(data.resultadoTipo === 'success'){
+            Swal.fire({
+                icon: "success",
+                title: "Para su informacion",
+                text: "El negocio ha sido actualizado exitosamente"
+            })
+            return data
+        }else if(data.resultadoTipo === 'warning'){
+            Swal.fire({
+                icon: "warning",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }else if(data.resultadoTipo === 'error'){
+            Swal.fire({
+                icon: "error",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }
+        return data
+    }catch(e){
+        Swal.fire({
+            icon: "error",
+            title: "Para su informacion",
+            text: "Error al actualizar el estado del negocio. Por favor, refresque la pagína o intente más tarde"
+        })
+        return null
+    }
+}

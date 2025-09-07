@@ -1,5 +1,6 @@
 import axios from "axios"
 import dotenv from "dotenv"
+import { endpointsAdmins } from "../ambientes/ambientes.js"
 
 dotenv.config()
 
@@ -7,7 +8,7 @@ const mensaje = 'Este endpoint devuelve '
 export const listarAdmins = async(req, res) => {
     try{
         const { data } = await axios.post(
-            process.env.URL_GET_ADMINS,
+            endpointsAdmins.getAdmins,
             {},
             {
                 headers: {
@@ -52,7 +53,7 @@ export const listarAdminsById = async(req, res) => {
     try{
         const { id } = req.params
         const { data } = await axios.post(
-            process.env.URL_GET_ADMINS_WITH_ID, { p_admin_id: id },
+            endpointsAdmins.getAdminsById, { p_admin_id: id },
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -95,7 +96,7 @@ export const insertartAdmins = async(req, res) => {
     try{
         const {  p_nombre, p_apellidos, p_email, p_telefono, p_estado, p_id_usuario_supabase } = req.body
         const { data } = await axios.post(
-            process.env.URL_INSERT_ADMINS,
+            endpointsAdmins.insertAdmin,
             {  p_nombre, p_apellidos, p_email, p_telefono, p_estado, p_id_usuario_supabase },
             {
                 headers: {
@@ -140,7 +141,7 @@ export const obtenerAdminIdPorUid = async(req, res) => {
     try{
         const { uid } = req.params
         const { data } = await axios.post(
-            process.env.URL_OBTENER_ADMIN_ID_POR_UID,
+            endpointsAdmins.getAdminsByIdUid,
             { p_id_usuario_supabase: uid },
             {
                 headers: {

@@ -1,7 +1,7 @@
 
 let Ambiente = '';
-// Ambiente = 'Local'
-Ambiente = 'Production'
+Ambiente = 'Local'
+// Ambiente = 'Production'
 
 let ruta_apis_admins = ''
 let ruta_apis_business = ''
@@ -23,7 +23,6 @@ switch(Ambiente){
 
 
 export const adminsRoutes: any = {
-    // LOCAL
     getAdmins: ruta_apis_admins + import.meta.env.VITE_ADMINS_GET_URL,
 
     insertAdmin: ruta_apis_admins + import.meta.env.VITE_API_ADMINS_INSERT_URL,
@@ -31,16 +30,12 @@ export const adminsRoutes: any = {
     getAdminsById: ruta_apis_admins + import.meta.env.VITE_API_ADMINS_GET_WITH_ID_URL,
 
     getAdminsByIdUid: ruta_apis_admins + import.meta.env.VITE_API_ADMINS_POR_ID_URL,
-
 }
 
 export const negociosRoutes: any = {
-    // LOCAL
-
     getNegocios: ruta_apis_business + import.meta.env.VITE_BUSSINES_GET_URL,
-    insertNegocio: ruta_apis_business + import.meta.env.VITE_BUSSINESS_INSERT_URL
-
+    insertNegocio: ruta_apis_business + import.meta.env.VITE_BUSSINESS_INSERT_URL,
+    getNegociosByIdAdmin: ruta_apis_business + import.meta.env.VITE_BUSSINESS_GET_WITH_ID_ADMIN_URL,
+    updateLogical: ruta_apis_business + import.meta.env.VITE_BUSINESS_UPDATE_LOGICAL_URL,
 }
 
-// 
-// RUTAS PARA TRABAJAR EN LOCAL

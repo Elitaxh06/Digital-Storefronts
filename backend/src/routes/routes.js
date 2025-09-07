@@ -8,7 +8,9 @@ import {
 
 import {
     listarNegocios,
-    insertNegocio
+    insertNegocio,
+    listarNegociosByIdAdmin,
+    desactivarActivarNegocio,
 } from "../controller/negocio.controller.js"
 const routes = Router()
 
@@ -25,6 +27,8 @@ routes.get("/obtenerAdminIdPorUid/:uid", obtenerAdminIdPorUid)
 // RUTAS PARA NEGOCIOS
 routes.get("/listarNegocios", listarNegocios)
 routes.post("/insertarNegocio", insertNegocio)
+routes.get("/listarNegocioByIdAdmin/:id", listarNegociosByIdAdmin)
+routes.post("/updateLogical", desactivarActivarNegocio)
 
 
 export default routes
