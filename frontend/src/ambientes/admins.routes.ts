@@ -1,7 +1,7 @@
 
 let Ambiente = '';
-Ambiente = 'Local'
-// Ambiente = 'Production'
+// Ambiente = 'Local'
+Ambiente = 'Production'
 
 let ruta_apis_admins = ''
 let ruta_apis_business = ''
