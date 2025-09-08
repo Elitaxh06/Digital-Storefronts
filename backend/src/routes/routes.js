@@ -11,6 +11,7 @@ import {
     insertNegocio,
     listarNegociosByIdAdmin,
     desactivarActivarNegocio,
+    updateTotalBusiness
 } from "../controller/negocio.controller.js"
 const routes = Router()
 
@@ -29,6 +30,7 @@ routes.get("/listarNegocios", listarNegocios)
 routes.post("/insertarNegocio", insertNegocio)
 routes.get("/listarNegocioByIdAdmin/:id", listarNegociosByIdAdmin)
 routes.post("/updateLogical", desactivarActivarNegocio)
+routes.put("/updateTotalBusiness", updateTotalBusiness)
 
 
 export default routes

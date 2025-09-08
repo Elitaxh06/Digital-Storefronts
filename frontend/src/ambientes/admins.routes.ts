@@ -1,7 +1,7 @@
 
 let Ambiente = '';
-// Ambiente = 'Local'
-Ambiente = 'Production'
+Ambiente = 'Local'
+// Ambiente = 'Production'
 
 let ruta_apis_admins = ''
 let ruta_apis_business = ''
@@ -37,5 +37,6 @@ export const negociosRoutes: any = {
     insertNegocio: ruta_apis_business + import.meta.env.VITE_BUSSINESS_INSERT_URL,
     getNegociosByIdAdmin: ruta_apis_business + import.meta.env.VITE_BUSSINESS_GET_WITH_ID_ADMIN_URL,
     updateLogical: ruta_apis_business + import.meta.env.VITE_BUSINESS_UPDATE_LOGICAL_URL,
+    updateTotalBusiness: ruta_apis_business + import.meta.env.VITE_BUSINESS_UPDATE_TOTAL_URL,
 }
 

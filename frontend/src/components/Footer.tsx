@@ -45,7 +45,7 @@ function Footer() {
 
                 </div>
                 <div>
-                    <FadeInSection direction="left" delay={0.5}>
+                    <FadeInSection direction="right" delay={0.5}>
 
                     <h2>Contacto</h2>
                     <ul className="text-slate-400 flex flex-col gap-1.5">

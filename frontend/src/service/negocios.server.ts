@@ -253,3 +253,66 @@ export const updateLogicalBusiness = async ({id, estado}: {id: number, estado: b
         return null
     }
 }
+
+type UpdateTotalBusinessParams = {
+    p_negocioid: number;
+    p_nombre: string;
+    p_descripcion: string;
+    p_email: string;
+    p_telefono: string;
+    p_direccion: string;
+    p_red_social_1: string;
+    p_red_social_2: string;
+    p_img_url_1: string;
+    p_id_admin: number;
+    p_id_categoria: number;
+    p_img_url_2?: string | null;
+    p_img_url_3?: string | null;
+    p_estado?: boolean;
+}
+
+
+export const updateTotalBusiness = async (params: UpdateTotalBusinessParams): Promise<ApiResponseBusiness | null> => {
+    try{
+        const { data } = await axios.put<ApiResponseBusiness | null>(
+            negociosRoutes.updateTotalBusiness,
+            { ...params },
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+        if(!data) return null
+        if(data.resultadoTipo === 'success'){
+            Swal.fire({
+                icon: "success",
+                title: "Para su informacion",
+                text: "El negocio ha sido actualizado exitosamente"
+            })
+            return data
+        }else if(data.resultadoTipo === 'warning'){
+            Swal.fire({
+                icon: "warning",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }else if(data.resultadoTipo === 'error'){
+            Swal.fire({
+                icon: "error",
+                title: "Para su informacion",
+                text: data.respuestaMensaje
+            })
+            return data
+        }
+        return data
+    }catch(e){
+        Swal.fire({
+            icon: "error",
+            title: "Para su informacion",
+            text: "Error al actualizar el estado del negocio. Por favor, refresque la pagína o intente más tarde"
+        })
+        return null
+    }
+}
