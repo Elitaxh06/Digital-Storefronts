@@ -5,12 +5,20 @@ import type { Business } from '../../types'
 import { esNegocio } from '../../utils/typeGurdsRead'
 import Loader2 from '../../components/Loaders/Loader2'
 import { EditBusiness } from './EditBusiness/EditBusiness'
+import { getBusinessById } from '../../service/negocios.server'
 import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { setNegocio } from '../../store'
 export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
 
     const [negocios, setNegocios] = useState<ApiResponseBusiness | null>(null)
     const [loading, setLoading] = useState(true)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     
+    
+
     const inactivarNegocio = async (id:number) => {
          Swal.fire({
             title: "¿Estás seguro?",
@@ -58,18 +66,15 @@ export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
         }
     }
 
-    const mostrarModal = () => {
-        Swal.fire({
-            title: "Ups 😅",
-            text: "Esta funcion aún no está implementada, proximamente estará disponible gracias a tu apoyo",
-            icon: "info",
-            showConfirmButton: true,
-        })
-    }
 
-    // const editarNegocio = async (id:number) => {
-    //     const result = await 
-    // }
+
+    const editarNegocio = async (id:number) => {
+        const result = await getBusinessById(id)
+        if(result){
+            dispatch(setNegocio(result))
+            navigate('/editarNegocio')
+        }
+    }
 
     const obtenerNegociosPorIdAdmin = async (id_admin: number) => {
         try{
@@ -138,7 +143,10 @@ export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
                                 <div className='flex items-center gap-2'>
                                     {/* <p>Registrado en : 2025</p> */}
                                     <button
-                                        onClick={mostrarModal}
+                                        onClick={() => {
+                                            const negocioId = negocio.negocioid ?? negocio.id;
+                                            if (negocioId) editarNegocio(negocioId);
+                                        }}
                                         className='bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 cursor-pointer font-semibold'
                                     >
                                         Editar
@@ -192,12 +200,15 @@ export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
                                     {/* <p>Registrado en : 2025</p> */}
                                     <button
                                         className='bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 cursor-pointer font-semibold'
-                                        onClick={mostrarModal}
+                                        onClick={() => {
+                                            const negocioId = negocio.negocioid ?? negocio.id;
+                                            if (negocioId) editarNegocio(negocioId);
+                                        }}
                                     >
                                         Editar
                                     </button>
                                     <button 
-                                        className='bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 cursor-pointer font-semibold'
+                                        className='bg-green-500 text-white p-2 rounded-lg hover:bg-green-c cursor-pointer font-semibold'
                                         onClick={() => {
                                             const negocioId = negocio.negocioid ?? negocio.id;
                                             if (negocioId) activarNegocio(negocioId);

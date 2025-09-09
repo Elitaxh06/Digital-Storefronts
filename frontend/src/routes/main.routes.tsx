@@ -5,6 +5,7 @@ import { Wrapper } from "../view/Login/Wrapper"
 import { Dashboard } from "../view/Admin/Dashboard"
 import Home from "../view/Home/Home"
 import { Register } from "../view/Login/Register"
+import { EditBusiness } from "../view/Admin/EditBusiness/EditBusiness"
 
 function RoutesMain() {
     return (
@@ -18,6 +19,7 @@ function RoutesMain() {
                     <Dashboard />
                 </Wrapper>
                 } />
+                <Route path="/editarNegocio" element={<EditBusiness />} />
 
 
             <Route path="/*" element={<Page_404 />} />

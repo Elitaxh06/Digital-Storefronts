@@ -38,5 +38,6 @@ export const negociosRoutes: any = {
     getNegociosByIdAdmin: ruta_apis_business + import.meta.env.VITE_BUSSINESS_GET_WITH_ID_ADMIN_URL,
     updateLogical: ruta_apis_business + import.meta.env.VITE_BUSINESS_UPDATE_LOGICAL_URL,
     updateTotalBusiness: ruta_apis_business + import.meta.env.VITE_BUSINESS_UPDATE_TOTAL_URL,
+    getNegocioById: ruta_apis_business + import.meta.env.VITE_BUSINESS_GET_BY_ID_URL,
 }
 

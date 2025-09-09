@@ -43,7 +43,8 @@ export const endpointsBusiness = {
 
     updateLogical: ruta_enpoints_business + process.env.URL_UPDATE_LOGICAL,
 
-    updateLogical: ruta_enpoints_business + process.env.URL_UPDATE_TOTAL
+    updateTotal: ruta_enpoints_business + process.env.URL_UPDATE_TOTAL,
 
+    getNegociosById: ruta_enpoints_business + process.env.URL_GET_NEGOCIO_BY_ID,
 
 }

@@ -8,6 +8,7 @@ import negocioReducer from "./negocioSlice";
 const persistConfig = {
     key: "root",
     storage,
+    version: 1,
 }
 
 const rootReducer = combineReducers({

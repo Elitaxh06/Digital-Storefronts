@@ -217,7 +217,7 @@ export const updateTotalBusiness = async(req, res) => {
             p_estado
         } = req.body
         const { data } = await axios.post(
-            endpointsBusiness.updateLogical,
+            endpointsBusiness.updateTotal,
             { p_negocioid, p_nombre, p_descripcion, p_email, p_telefono, p_direccion, p_red_social_1, p_red_social_2, p_img_url_1, p_id_admin, p_id_categoria, p_img_url_2, p_img_url_3, p_estado },
             {
                 headers: {
@@ -251,6 +251,48 @@ export const updateTotalBusiness = async(req, res) => {
         }
         return res.json(result)
         
+    }catch(e){
+        return res.status(500).json({ resultadoTipo: 'error', respuestaMensaje: e.message });
+    }
+}
+
+export const getBusinessById = async(req, res) => {
+    try{
+        const { id } = req.params
+        const { data } = await axios.post(
+            endpointsBusiness.getNegociosById,
+            { p_negocioid: id },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey" : process.env.API_KEY_SERVICE_ROLE,
+                    "Authorization" : `Bearer ${process.env.AUTHORIZATION_SERVICE_ROLE}`
+                }
+            }            
+        )
+        const result = data
+        const { msj_texto, msj_tipo } = result[0]
+        const respuesta = result
+        const mensajeCompletoSuccess = {
+            "resultadoTipo" : msj_tipo,
+            "respuestaMensaje" : msj_texto,
+            "datos" : respuesta,
+            "mensaje" : mensaje + 'la lista de negocios'
+        }
+        const mensajeCompletoWarningError = {
+            "resultadoTipo" : msj_tipo,
+            "respuestaMensaje" : msj_texto,
+            "datos" : "",
+            "mensaje" : mensaje + 'la lista de negocios'
+        }
+
+        // DEVOLVER UNA RESPUESTA MAS ELABORADA PARA EL FRONTEND
+        if(msj_tipo === 'success'){
+            return res.json(mensajeCompletoSuccess)
+        }else if(msj_tipo === 'warning' || msj_tipo === 'error'){
+            return res.json(mensajeCompletoWarningError)
+        }
+        return res.json(result)
     }catch(e){
         return res.status(500).json({ resultadoTipo: 'error', respuestaMensaje: e.message });
     }

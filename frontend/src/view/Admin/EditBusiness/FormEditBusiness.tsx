@@ -7,7 +7,9 @@ import { useSelector } from "react-redux"
 
 function FormEditBusiness() {
   const navigate = useNavigate()
-  const businessForEdit = useSelector((state: any) => state.datosNegociosRedux.negocio[0])
+  const businessForEdit = useSelector(
+    (state: any) => state.datosNegociosRedux.negocio?.datos?.[0]
+  )
 
   const [form, setForm] = useState({
     p_negocioid: 0,
@@ -20,7 +22,7 @@ function FormEditBusiness() {
     p_red_social_2: '',
     p_img_url_1: '',
     p_id_admin: 0,
-    p_id_categoria: 0,
+    p_id_categoria: '',
     p_img_url_2: '',
     p_img_url_3: '',
     p_estado: true
@@ -43,7 +45,7 @@ function FormEditBusiness() {
         form.p_email === '' ||
         form.p_telefono === '' ||
         form.p_direccion === '' ||
-        form.p_id_categoria === 0
+        form.p_id_categoria === ''
       ) {
         Swal.fire({
           icon: 'info',
@@ -71,7 +73,7 @@ function FormEditBusiness() {
   const initialData = () => {
     if (businessForEdit) {
       setForm({
-        p_negocioid: businessForEdit.id,
+        p_negocioid: businessForEdit.negocioid,
         p_nombre: businessForEdit.nombre || '',
         p_descripcion: businessForEdit.descripcion || '',
         p_email: businessForEdit.email || '',

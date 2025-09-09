@@ -219,7 +219,7 @@ export const updateLogicalBusiness = async ({id, estado}: {id: number, estado: b
                 }
             }
         )
-        // debugger
+        debugger
         if(!data) return null
         if(data.resultadoTipo === 'success'){
             Swal.fire({
@@ -265,24 +265,43 @@ type UpdateTotalBusinessParams = {
     p_red_social_2: string;
     p_img_url_1: string;
     p_id_admin: number;
-    p_id_categoria: number;
+    p_id_categoria: string;
     p_img_url_2?: string | null;
     p_img_url_3?: string | null;
     p_estado?: boolean;
 }
 
 
-export const updateTotalBusiness = async (params: UpdateTotalBusinessParams): Promise<ApiResponseBusiness | null> => {
+
+export const updateTotalBusiness = async (params: UpdateTotalBusinessParams): Promise<ApiResponseBusiness | null | undefined> => {
     try{
+        const telefonoParseado = Number(params.p_telefono)
+        const idCategoriaParseado = Number(params.p_id_categoria)
         const { data } = await axios.put<ApiResponseBusiness | null>(
-            negociosRoutes.updateTotalBusiness,
-            { ...params },
+            negociosRoutes.updateTotalBusiness + params.p_negocioid,
+            {   
+                p_negocioid: params.p_negocioid,
+                p_nombre: params.p_nombre,
+                p_descripcion: params.p_descripcion,
+                p_email: params.p_email,
+                p_telefono: telefonoParseado,
+                p_direccion: params.p_direccion,
+                p_red_social_1: params.p_red_social_1,
+                p_red_social_2: params.p_red_social_2,
+                p_img_url_1: params.p_img_url_1,
+                p_id_admin: params.p_id_admin,
+                p_id_categoria: idCategoriaParseado,
+                p_img_url_2: params.p_img_url_2,
+                p_img_url_3: params.p_img_url_3,
+                p_estado: params.p_estado
+            },
             {
                 headers: {
                     "Content-Type": "application/json"
                 }
             }
         )
+        debugger
         if(!data) return null
         if(data.resultadoTipo === 'success'){
             Swal.fire({
@@ -312,6 +331,47 @@ export const updateTotalBusiness = async (params: UpdateTotalBusinessParams): Pr
             icon: "error",
             title: "Para su informacion",
             text: "Error al actualizar el estado del negocio. Por favor, refresque la pagína o intente más tarde"
+        })
+        return null
+    }
+}
+
+export const getBusinessById = async (id: number): Promise<ApiResponseBusiness | null> => {
+    try{
+        const { data } = await axios.get<ApiResponseBusiness | null>(
+            negociosRoutes.getNegocioById + id,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+        if(!data) return null
+        if(data.resultadoTipo === 'success'){
+            return data
+        }else if(data.resultadoTipo === 'warning'){
+            Swal.fire({
+                icon: "info",
+                title: "Para su informacion",
+                text: "No se encontraron datos de negocios asociados a su cuenta. Por favor, refresque la pagína o intente más tarde"
+            })
+            return data
+            // return data
+        }else if(data.resultadoTipo === 'error'){
+            Swal.fire({
+                icon: "info",
+                title: "Para su informacion",
+                text: "Error al obtener los datos de los negocios por ID de administrador. Por favor, refresque la pagína o intente más tarde"
+                // text: data.respuestaMensaje
+            })
+            return data
+        }
+        return data
+    }catch(e){
+        Swal.fire({
+            icon: "error",
+            title: "Para su informacion",
+            text: "Error al obtener los datos de los negocios. Por favor, refresque la pagína o intente más tarde"
         })
         return null
     }
