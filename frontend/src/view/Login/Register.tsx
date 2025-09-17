@@ -2,21 +2,22 @@ import supabase from "../../Lib/SupabaseClient";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { showInfoAlert } from "../../helpers/Swal/InfoAlertSwal";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Register(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [message, setMessage ] = useState("")
-
+    const navigate = useNavigate()
+    
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         setEmail("")
         setPassword("")
         setName("")
         setPhoneNumber("")
-        setMessage("")
 
         const phoneRegex = /^[0-9]{8}$/ 
         if(!phoneRegex.test(phoneNumber)){
@@ -39,7 +40,16 @@ function Register(){
             return;
         }
         if(data){
-            setMessage("Usuario creado con éxito. Por favor, verifica tu correo electrónico para completar el registro.")
+            Swal.fire({
+                icon:"success",
+                title: "Usuario creado con éxito",
+                text: "Usuario creado con éxito. Por favor, verifica tu correo electrónico para completar el registro.",
+                confirmButtonText: "Aceptar"
+            }).then((result) => {
+                if(result.isConfirmed){
+                    navigate("/login")
+                }
+            })
         }
         setEmail("")
         setPassword("")
@@ -48,12 +58,6 @@ function Register(){
     return(
         <section className="mt-24 mb-22 px-4">
             <h2 className="text-center font-bold text-3xl">Crear Cuenta</h2>
-            {message && (
-                <div className="flex justify-center my-5">
-                    <span className="text-center font-semibold text-xl">{message}</span>
-                </div>
-            )}
-
             <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="relative z-0 w-full mb-5 group">
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder=" " name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />

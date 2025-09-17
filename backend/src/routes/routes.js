@@ -16,6 +16,8 @@ import {
 } from "../controller/negocio.controller.js"
 const routes = Router()
 
+
+
 // ************************************************************************
 // RUTAS PARA ADMINS
 routes.get("/listarAdmins", listarAdmins)

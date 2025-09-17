@@ -221,9 +221,9 @@ export const getAdminsByUid = async (uid: string): Promise<ApiResponseAdmins | n
             return data
         }else if(data?.resultadoTipo === 'warning'){
             Swal.fire({
-                icon: "warning",
+                icon: "info",
                 title: "Para su informacion",
-                text: 'No se encontró un administrador asociado a su cuenta, Por favor, verifica tu cuenta o contacta al soporte.'
+                text: 'No se encontró un administrador asociado a su cuenta, Si es tu primera vez registrando, cree uno nuevo, sino contacte al soporte, Gracias.'
             })
             return data
         }else if(data?.resultadoTipo === 'error'){
@@ -237,9 +237,10 @@ export const getAdminsByUid = async (uid: string): Promise<ApiResponseAdmins | n
         return data || null
     }catch(e){
         Swal.fire({
-            icon: "error",
+            icon: "warning",
             title: "Para su informacion",
-            text: "Error al obtener los datos del administrador por UID"
+            text: "No se encontró un administrador asociado a su cuenta, si nunca se ha registrado, cree uno nuevo, sino contacte al soporte, Gracias.",
+            confirmButtonText: "Aceptar"
         })
         console.log('Error al obtener los datos del administrador por UID', e)
         return null

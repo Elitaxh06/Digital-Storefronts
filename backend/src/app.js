@@ -3,6 +3,7 @@ import cors from "cors"
 import morgan from "morgan"
 import routes from "./routes/routes.js"
 
+
 const app = express()
 
 app.use(cors({

@@ -4,12 +4,15 @@ import type { ApiResponseBusiness } from '../../types'
 import type { Business } from '../../types'
 import { esNegocio } from '../../utils/typeGurdsRead'
 import Loader2 from '../../components/Loaders/Loader2'
-import { EditBusiness } from './EditBusiness/EditBusiness'
 import { getBusinessById } from '../../service/negocios.server'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setNegocio } from '../../store'
+
+// type Props = {
+//     id_admin: number
+// }
 export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
 
     const [negocios, setNegocios] = useState<ApiResponseBusiness | null>(null)
@@ -102,7 +105,6 @@ export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
         <div className="flex flex-col items-center justify-center">
             <h1 className="text-3xl font-bold">Mis Negocios</h1>
             <div className="flex justify-around flex-direction-column flex-wrap items-center gap-5 my-4 w-full">
-    
                 {negocios?.datos && esNegocio(negocios.datos) ? (
                     <>
                         {negocios.datos.activos.map((negocio: Business) => (
@@ -215,7 +217,6 @@ export default function NegoiosByIdAdmin({id_admin}: {id_admin: number}) {
                                         }}
                                     >Activar</button>   
                                 </div>
-                                <EditBusiness />
                             </div>
                         ))}
                     </>

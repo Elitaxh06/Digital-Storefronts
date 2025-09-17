@@ -8,7 +8,7 @@ import HeaderDashboard from "./HeaderDashboard"
 import Loader from "../../components/Loaders/Loader";
 import RegisterBussiness from "./RegisterBussiness";
 
-type Modo = 'ver' | 'agregar'
+type Modo = 'ver' | 'agregar' 
 
 function Dashboard(){
     const [admin, setAdmin] = useState<Admin | null>(null);

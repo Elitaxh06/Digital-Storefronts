@@ -2,7 +2,7 @@ import type { Admin } from '../../types'
 import FormAddBussiness from './FormAddBussiness'
 import NegoiosByIdAdmin from './NegociosByIdAdmin'
 
-type Modo = 'ver' | 'agregar'
+type Modo = 'ver' | 'agregar' 
 
 type Props = {
     admin: Admin

@@ -32,23 +32,19 @@ function CardNegocios() {
         }
     }
     useEffect(() => {
-        getInitialData()
+        setTimeout(() => {
+            getInitialData()
+
+        }, 4000)
     }, [])
     // console.log('Datos de business:', business.datos?.activos);
 
     if(loading) return (
-        <div className="card flex items-center justify-center my-8">
-            <div className="loader">
-              <p className="font-semibold">Cargando</p>
-              <div className="words">
-                <span className="word">Detalles</span>
-                <span className="word">Negocios</span>
-                <span className="word">Categoría</span>
-                <span className="word">Información</span>
-                <span className="word">Ubicación</span>
-              </div>
-            </div>
+        <div className="spinnerContainer">
+            <div className="spinner"></div>
+            <p className="mt-3 font-semibold text-lg mb-24">Cargando negocios...</p>
         </div>
+
 
     )
     return (

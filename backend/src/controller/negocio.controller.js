@@ -2,7 +2,6 @@ import axios from "axios"
 import dotenv from "dotenv"
 import { endpointsBusiness } from "../ambientes/ambientes.js"
 
-// import { getConnection, negocioQuerys } from "../models/index.js";
 
 dotenv.config()
 const mensaje = 'Este endpoint devuelve '
@@ -297,3 +296,5 @@ export const getBusinessById = async(req, res) => {
         return res.status(500).json({ resultadoTipo: 'error', respuestaMensaje: e.message });
     }
 }
+
+

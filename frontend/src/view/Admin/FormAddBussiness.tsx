@@ -3,11 +3,17 @@ import { insertBussiness } from "../../service/negocios.server"
 import Swal from "sweetalert2";
 import { showInfoAlert } from "../../helpers/Swal/InfoAlertSwal";
 import type { Admin } from '../../types';
+import supabase from "../../Lib/SupabaseClient";
 
 type Props = {
     admin: Admin
 }
 export default function FormAddBussiness({admin}: Props) {
+
+  const [file1, setFile1] = useState<File | null>(null);
+  const [file2, setFile2] = useState<File | null>(null);
+  const [file3, setFile3] = useState<File | null>(null);
+
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [email, setEmail] = useState('');
@@ -22,6 +28,24 @@ export default function FormAddBussiness({admin}: Props) {
   const [idCategoria, setIdCategoria] = useState<string | null>(null);
 
 
+  const uploadFile = async (file: File, nombrePrefix: string) => {
+    const fileExt = file.name.split(".").pop()
+    const fileName = `${nombrePrefix}-${Date.now()}.${fileExt}`
+    const filePath = `negocios/${fileName}`
+
+    const { error } = await supabase.storage
+      .from("negocios")
+      .upload(filePath, file)
+
+      if(error) throw error
+
+      const { data } = await supabase.storage
+        .from("negocios")
+        .getPublicUrl(filePath)
+
+      return data.publicUrl
+  }
+
   const insertBussinessHandler = async (e: React.FormEvent) => {
     e.preventDefault()
     const phoneRegex = /^[0-9]{8}$/ 
@@ -29,7 +53,7 @@ export default function FormAddBussiness({admin}: Props) {
           showInfoAlert("El número de teléfono debe contener solo numero  tiene que ser de 8 dígitos.", "info")   
           return
     }
-    if(!nombre || !descripcion || !email || !telefono || !direccion || !redSocial1 || !redSocial2 || !imgUrl1 || !idAdmin || !idCategoria) {
+    if(!nombre || !descripcion || !email || !telefono || !direccion || !redSocial1.trim() || !redSocial2.trim() || (!imgUrl1 && !file1) || !idAdmin || !idCategoria) {
       Swal.fire({
         icon: "warning",
         title: "Campos incompletos",
@@ -39,18 +63,28 @@ export default function FormAddBussiness({admin}: Props) {
       return
     }
     try{
+      let url1 = imgUrl1    
+      let url2 = imgUrl2  
+      let url3 = imgUrl3    
 
-      const result = await insertBussiness({
+      if(file1) url1 = await uploadFile(file1, "img1")
+      if(file2) url2 = await uploadFile(file2, "img2")
+      if(file3) url3 = await uploadFile(file3, "img3")
+        
+      const fullRedSocial1 = `https://instagram.com/${redSocial1}`
+      const fullRedSocial2 = `https://facebook.com/${redSocial2}`
+
+        const result = await insertBussiness({
         nombre,
         descripcion,
         email,
         telefono,
         direccion,
-        redSocial1,
-        redSocial2,
-        imgUrl1,
-        imgUrl2,
-        imgUrl3,
+        redSocial1: fullRedSocial1,
+        redSocial2: fullRedSocial2,
+        imgUrl1: url1,
+        imgUrl2: url2,
+        imgUrl3: url3,
         idAdmin: admin.adminid,
         idCategoria,
         estado: true
@@ -71,6 +105,9 @@ export default function FormAddBussiness({admin}: Props) {
         setImgUrl1("");
         setImgUrl2("");
         setImgUrl3("");
+        setFile1(null);
+        setFile2(null);
+        setFile3(null);
         setIdCategoria("");
       }
 
@@ -88,8 +125,8 @@ export default function FormAddBussiness({admin}: Props) {
               title: "Error",
               text: "Ocurrió un error inesperado"
           });
+          console.error("Error al insertar el Negocio:", e);
       }
-      console.error("Error al insertar el Negocio:", e);
       return;
     }
   }
@@ -165,7 +202,7 @@ export default function FormAddBussiness({admin}: Props) {
             <label className="block text-sm font-medium mb-1">Red Social 1 *</label>
             <input
               type="text"
-              placeholder="Ej: https://instagram.com/tu-negocio"
+              placeholder="EL usuario deinstagram"
               value={redSocial1}
               onChange={(e) => setRedSocial1(e.target.value)}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -178,7 +215,7 @@ export default function FormAddBussiness({admin}: Props) {
             <label className="block text-sm font-medium mb-1">Red Social 2 *</label>
             <input
               type="text"
-              placeholder="Ej: https://facebook.com/tu-negocio"
+              placeholder="El usuario de facebook"
               value={redSocial2}
               onChange={(e) => setRedSocial2(e.target.value)}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -188,38 +225,37 @@ export default function FormAddBussiness({admin}: Props) {
 
           {/* Imagen URL 1 */}
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Imagen URL 1 *</label>
+            <label className="block text-sm font-medium mb-1">Imagen 1 *</label>
             <input
-              type="text"
-              placeholder="URL de imagen"
-              value={imgUrl1}
-              onChange={(e) => setImgUrl1(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              type="file"
+              placeholder="imagen"
+              accept="image/*"
+              
+              onChange={(e) => setFile1(e.target.files?.[0] || null)}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
               required
             />
           </div>
 
           {/* Imagen URL 2 (opcional) */}
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Imagen URL 2 (opcional)</label>
+            <label className="block text-sm font-medium mb-1">Imagen 2 (opcional)</label>
             <input
-              type="text"
-              placeholder="URL de imagen"
-              value={imgUrl2}
-              onChange={(e) => setImgUrl2(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile2(e.target.files?.[0] || null)}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer"
             />
           </div>
 
           {/* Imagen URL 3 (opcional) */}
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Imagen URL 3 (opcional)</label>
+            <label className="block text-sm font-medium mb-1">Imagen 3 (opcional)</label>
             <input
-              type="text"
-              placeholder="URL de imagen"
-              value={imgUrl3}
-              onChange={(e) => setImgUrl3(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setFile3(e.target.files?.[0] || null)}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer"
             />
           </div>
 

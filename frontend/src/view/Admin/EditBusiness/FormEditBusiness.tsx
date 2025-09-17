@@ -99,109 +99,115 @@ function FormEditBusiness() {
     <section className="flex flex-col items-center justify-center mt-5">
       <form
         onSubmit={guardar}
-        className="flex flex-col gap-3 border border-slate-500 rounded-md w-2xl p-6 shadow-[0_0_10px_#22c55e]"
+        className="flex flex-col gap-4 border border-slate-300 rounded-lg w-full max-w-xl p-6 shadow-md bg-white"
       >
-        <label className="font-semibold">Nombre</label>
+        <h2 className="text-xl font-bold text-center text-sky-600">
+          Edita tu negocio
+        </h2>
+
+        <label className="font-semibold">Nombre *</label>
         <input
           type="text"
           name="p_nombre"
           value={form.p_nombre}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Descripción</label>
-        <input
-          type="text"
+        <label className="font-semibold">Descripción *</label>
+        <textarea
           name="p_descripcion"
           value={form.p_descripcion}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Email</label>
+        <label className="font-semibold">Email *</label>
         <input
           type="email"
           name="p_email"
           value={form.p_email}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Teléfono</label>
+        <label className="font-semibold">Teléfono *</label>
         <input
           type="number"
           name="p_telefono"
           value={form.p_telefono}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Dirección</label>
+        <label className="font-semibold">Dirección *</label>
         <input
           type="text"
           name="p_direccion"
           value={form.p_direccion}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Red Social 1</label>
+        <label className="font-semibold">Red Social 1 *</label>
         <input
           type="text"
           name="p_red_social_1"
           value={form.p_red_social_1}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Red Social 2</label>
+        <label className="font-semibold">Red Social 2 *</label>
         <input
           type="text"
           name="p_red_social_2"
           value={form.p_red_social_2}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Imagen 1</label>
+        <label className="font-semibold">Imagen 1 *</label>
         <input
           type="text"
           name="p_img_url_1"
           value={form.p_img_url_1}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Imagen 2</label>
+        <label className="font-semibold">Imagen 2 (opcional)</label>
         <input
           type="text"
           name="p_img_url_2"
           value={form.p_img_url_2}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Imagen 3</label>
+        <label className="font-semibold">Imagen 3 (opcional)</label>
         <input
           type="text"
           name="p_img_url_3"
           value={form.p_img_url_3}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Activo</label>
-        <input
-          type="checkbox"
-          name="p_estado"
-          checked={form.p_estado}
-          onChange={handleChange}
-        />
+        <div className="flex items-center gap-2">
+          <label className="font-semibold">Activo</label>
+          <input
+            type="checkbox"
+            name="p_estado"
+            checked={form.p_estado}
+            className="border rounded cursor-pointer"
+            onChange={handleChange}
+          />
+        </div>
 
         <button
           type="submit"
-          className="bg-sky-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-sky-400 transition"
+          className="bg-sky-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-sky-400 transition cursor-pointer"
         >
           Guardar
         </button>
