@@ -43,7 +43,7 @@ export default function SectionCards() {
                 </button>
             ))}
         </div>
-      </FadeInSection>
+        </FadeInSection>
         <CardNegocios />
     </section>
 

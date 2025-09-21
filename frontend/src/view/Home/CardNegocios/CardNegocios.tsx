@@ -6,12 +6,19 @@ import InstagramSVG from "../../../components/SVGS/InstagramSVG"
 import { getNegocios } from "../../../service/negocios.server"
 import FadeInSection from "../../../components/FadeInSection"
 import XSVG from "../../../components/SVGS/XSVG"
+import Fuse from "fuse.js"
 import "./CardNegocios.css"
 function CardNegocios() {
     const [business, setBusiness ] = useState<ApiResponseBusiness | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [showModal, setShowModal ] = useState<Business | null>(null)
     const [mostratCantidad, setMostartCantidad] = useState<number>(3)
+
+    //constantes para filtrar negocios
+    const [query, setQuery] = useState<string>("")
+    const [filteredResults, setFilteredResults] = useState<Business[]>([])
+
+        
     const cargarMas = () => {
         setMostartCantidad((prev) => prev + 3)
     }
@@ -22,7 +29,7 @@ function CardNegocios() {
     }
     const getInitialData = async () => {
         try{
-            const data = await getNegocios()
+            const data =await getNegocios()
             setBusiness(data)
             setLoading(false)
         }catch(e) { 
@@ -31,13 +38,30 @@ function CardNegocios() {
             setLoading(false)
         }
     }
+
+   
     useEffect(() => {
         setTimeout(() => {
             getInitialData()
 
         }, 4000)
     }, [])
-    // console.log('Datos de business:', business.datos?.activos);
+
+
+    useEffect(() => {
+        if(business?.datos && esNegocio(business.datos)){
+            const fuse = new Fuse(business.datos.activos, {
+                keys: ["nombre", "nombre_categoria", "nombre_admin"], 
+                threshold: 0.5
+            })
+            if(query.trim() ===""){ // si la busqueda (query) esta vacia, solo se muestran los negocios activos
+                setFilteredResults(business.datos.activos)
+            }else{
+                const results = fuse.search(query)
+                setFilteredResults(results.map(r=>r.item))
+            }
+        }
+    }, [query, business])
 
     if(loading) return (
         <div className="spinnerContainer">
@@ -56,29 +80,45 @@ function CardNegocios() {
                     <>
                     <FadeInSection direction="down" delay={0.5}>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  mx-2 my-4 rounded-lg gap-6 gap-y-6 ml-10 mr-10">
-                        {business.datos.activos.slice(0, mostratCantidad).map((business: Business) => (
-                            <div key={business.id ?? business.negocioid} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2 hover:shadow-2xl transition-transform duration-200 hover:text-orange-500">
-                                    <div className="flex flex-col">
-                                        <div className="relative">
-                                            <img src={business.img_url_1} alt="Imagen de la tienda" className="object-cover h-48 rounded-t-lg w-full" />
-                                            <div className="absolute inset-0 bg- bg-opacity-50 flex justify-start items-start">
-                                                <p className="bg-slate-200 text-black text-sm rounded-xl py-1 px-2">{business.nombre_categoria}</p>
-                                            </div>
-                                        </div>
-                                        <p className="mt-4 font-bold text-xl">{business.nombre}</p>    
-                                        <p className="text-slate-600 mt-3">Emprendimiento presentado por {business.nombre_admin}</p>
-                                        <h3 className="text-slate-700 flex-grow mt-3 line-clamp-1 desc">{business.descripcion}</h3>
-                                        <p className="flex items-center text-slate-500 mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin h-4 w-4 mr-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>{business.direccion}</p>
-                                        <div className="flex justify-center">  
-                                            <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer hover:scale-105 w-[90%] transition-transform duration-200 text-white h-10 rounded-lg font-semibold mt-5" onClick={() => setShowModal(business)}>Ver mas detalles</button>
-                                        </div>
-                                </div>
-                            </div>
-
-                        ))}
+                    <div className="flex justify-center my-6">
+                        <input 
+                            type="text" 
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Buscar negocios..."
+                            className="w-1/2 p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        />
                     </div>
-                        {mostratCantidad < business.datos.activos.length ?(
+
+                        {filteredResults.length > 0 ? (
+                            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  mx-2 my-4 rounded-lg gap-6 gap-y-6 ml-10 mr-10">
+                                {filteredResults.slice(0, mostratCantidad).map((business: Business) => (
+                                    <div key={business.id ?? business.negocioid} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2 hover:shadow-2xl       transition-transform duration-200 hover:text-orange-500">
+                                            <div className="flex flex-col">
+                                                <div className="relative">
+                                                    <img src={business.img_url_1} alt={`Imagen de la tienda ${business.nombre}`} className="object-cover h-48 rounded-t-lg w-full" />
+                                                    <div className="absolute inset-0 bg- bg-opacity-50 flex justify-start items-start">
+                                                        <p className="bg-slate-200 text-black text-sm rounded-xl py-1 px-2">{business.nombre_categoria}</p>
+                                                    </div>
+                                                </div>
+                                                <p className="mt-4 font-bold text-xl">{business.nombre}</p>    
+                                                <p className="text-slate-600 mt-3">Emprendimiento presentado por {business.nombre_admin}</p>
+                                                <h3 className="text-slate-700 flex-grow mt-3 line-clamp-1 desc">{business.descripcion}</h3>
+                                                <p className="flex items-center text-slate-500 mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin h-4 w-4 mr-1"><path d="M20 10c0 6-8     12-8    12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>{business.direccion}</p>
+                                                <div className="flex justify-center">  
+                                                    <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer hover:scale-105 w-[90%] transition-transform duration-200 text-white h-10   rounded-lg  font-semibold mt-5" onClick={() => setShowModal(business)}>Ver mas detalles</button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <h2 className="text-xl text-center font-bold my-5">
+                                Ups... no hay coincidencias. Prueba con otro nombre o vuelve a la lista completa.
+                            </h2>
+                        )}
+                        
+                        {mostratCantidad < filteredResults.length ?(
                             <div className="flex items-center justify-center">
                                 <button className="bg-orange-500 hover:bg-orange-600 cursor-pointer text-white p-3 rounded-lg font-semibold mt-5 mb-5" onClick={cargarMas}>
                                     Cargar mas
