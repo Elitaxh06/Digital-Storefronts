@@ -58,9 +58,6 @@ as $$
 $$
 DROP FUNCTION fn_listar_admin()
 
-select * from fn_listar_admin()
-
-
 DROP FUNCTION IF EXISTS fn_listar_negocio();
 CREATE OR REPLACE FUNCTION fn_listar_negocio()
 RETURNS TABLE(
@@ -74,6 +71,7 @@ RETURNS TABLE(
 	img_url_1 TEXT,
 	img_url_2 TEXT,
 	img_url_3 TEXT,
+	telefono INT,
 	estado BOOLEAN,
 	id_admin INT,
 	nombre_admin VARCHAR,
@@ -97,6 +95,7 @@ BEGIN
 			N.Img_url_1,
 			N.Img_url_2,
 			N.Img_url_3,
+			N.Telefono,
 			N.Estado,
 			N.id_admin,
 			A.Nombre AS nombre_admin,
@@ -119,6 +118,7 @@ BEGIN
 			NULL::TEXT,
 			NULL::TEXT,
 			NULL::TEXT,
+			NULL::INT,
 			NULL::BOOLEAN,
 			NULL::INT,
 			NULL::VARCHAR,
@@ -140,6 +140,7 @@ EXCEPTION WHEN OTHERS THEN
 		NULL::TEXT,
 		NULL::TEXT,
 		NULL::TEXT,
+		NULL::INT,
 		NULL::BOOLEAN,
 		NULL::INT,
 		NULL::VARCHAR,
@@ -149,4 +150,82 @@ EXCEPTION WHEN OTHERS THEN
 END;
 $$;
 
-select * from fn_listar_negocio()
+create or replace function fn_listar_negocio_por_id(
+	p_negocioid int
+)
+returns table(
+	negocioid int,
+	nombre varchar,
+  descripcion text,
+  email varchar,
+  telefono int,
+  direccion text,
+  red_social_1 text,
+  red_social_2 text,
+  img_url_1 text,
+  id_admin int,
+  id_categoria int,
+  img_url_2 text,
+  img_url_3 text,
+  estado boolean,
+	msj_tipo text,
+	msj_texto text
+)
+as $$
+begin
+		if p_negocioid is null or p_negocioid <= 0 then
+		return query
+		select 
+			NULL::INT,
+      NULL::VARCHAR, NULL::TEXT, NULL::VARCHAR, NULL::INT, NULL::TEXT,
+      NULL::TEXT, NULL::TEXT, NULL::TEXT, NULL::INT, NULL::INT,
+      NULL::TEXT, NULL::TEXT, NULL::BOOLEAN,
+			'warning', 'Debes ingresar un id valido.';
+		return;
+		end if;
+		
+		return query
+		select
+			n.negocioid,
+			n.nombre,
+    	n.descripcion,
+    	n.email,
+    	n.telefono,
+    	n.direccion,
+    	n.red_social_1,
+    	n.red_social_2,
+    	n.img_url_1,
+    	n.id_admin,
+    	n.id_categoria,
+    	n.img_url_2,
+    	n.img_url_3,
+    	n.estado,
+			'success', 'Negocio encontrado correctamente'
+		from t_negocios n
+		where n.negocioid = p_negocioid;
+
+		IF NOT FOUND THEN
+    RETURN QUERY
+    SELECT 
+      NULL::INT,
+      NULL::VARCHAR, NULL::TEXT, NULL::VARCHAR, NULL::INT, NULL::TEXT,
+      NULL::TEXT, NULL::TEXT, NULL::TEXT, NULL::INT, NULL::INT,
+      NULL::TEXT, NULL::TEXT, NULL::BOOLEAN,
+      'warning',
+      'No se encontró un negocio con ese id';
+  	END IF;
+
+
+		EXCEPTION WHEN OTHERS THEN
+  -- Caso: error inesperado
+  RETURN QUERY
+  SELECT 
+    	NULL::INT,
+      NULL::VARCHAR, NULL::TEXT, NULL::VARCHAR, NULL::INT, NULL::TEXT,
+      NULL::TEXT, NULL::TEXT, NULL::TEXT, NULL::INT, NULL::INT,
+      NULL::TEXT, NULL::TEXT, NULL::BOOLEAN,
+    'error',
+    'Error interno al listar el negocio';
+end;
+$$ language plpgsql
+

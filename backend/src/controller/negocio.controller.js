@@ -1,6 +1,14 @@
 import axios from "axios" 
 import dotenv from "dotenv"
+import multer from 'multer'
+import { createClient } from '@supabase/supabase-js'
 import { endpointsBusiness } from "../ambientes/ambientes.js"
+
+
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.AUTHORIZATION_SERVICE_ROLE
+)
 
 
 dotenv.config()
@@ -55,6 +63,45 @@ export const listarNegocios = async(req, res) => {
     }
 }
 
+export const subirImagenes = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ resultadoTipo: "error", respuestaMensaje: "No file uploaded" });
+    }
+
+    const fileBuffer = req.file.buffer;
+    const fileName = `${Date.now()}-${req.file.originalname}`;
+
+    const { data, error } = await supabase.storage
+      .from("negocios")
+      .upload(`negocios/${fileName}`, fileBuffer, {
+        contentType: req.file.mimetype,
+        upsert: false,
+      });
+
+    if (error) {
+      console.error("Error al subir archivo a Supabase:", error.message);
+      return res.status(500).json({ resultadoTipo: "error", respuestaMensaje: error.message });
+    }
+
+    const { data: publicData } = supabase.storage
+      .from("negocios")
+      .getPublicUrl(`negocios/${fileName}`);
+
+    console.log("Respuesta que se enviará al frontend:", publicData.publicUrl);
+
+    return res.status(200).json({
+      resultadoTipo: "success",
+      respuestaMensaje: "Imagen subida exitosamente",
+      publicUrl: publicData.publicUrl
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ resultadoTipo: "error", respuestaMensaje: "Error al subir la imagen" });
+  }
+};
+
+
 export const insertNegocio = async(req, res) => {
     try{
         const { p_nombre,p_descripcion,p_email,p_telefono,p_direccion,p_red_social_1,p_red_social_2,p_img_url_1,p_img_url_2,p_img_url_3,p_id_admin,p_id_categoria,p_estado } = req.body
@@ -94,6 +141,8 @@ export const insertNegocio = async(req, res) => {
         }else if(msj_tipo === 'warning' || msj_tipo === 'error') {
             return res.json(mensajeCompletoWarningError)
         }
+        
+        console.log(req.body, 'flaksjf;;alskfjasl;kjfasl;kfjads;lk')
         return res.json(result)
     }catch(error){
               console.error('Error en insertarNegocio:', error);

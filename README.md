@@ -18,13 +18,13 @@ Muchos comercios locales no tienen visibilidad digital por falta de recursos. Es
 
 | Parte         | Stack                                       |
 |---------------|---------------------------------------------|
-| Backend       | Node.js · Express · PostgreSQL              |   
+| Backend       | Node.js · Express                           |   
 | Frontend      | React · TypeScript · Redux · Tailwind CSS   |
 | Base de datos | PostgreSQL                                  |  
 
 ---
 
-## ⚙️ Funcionalidades que va a tener este proyecto, actualmente esta en desarrollo 🚧
+## ⚙️ Funcionalidades
 
 ✅ Registro e inicio de sesión para dueños de negocio  
 ✅ Creación y edición de negocios  
@@ -37,9 +37,10 @@ Muchos comercios locales no tienen visibilidad digital por falta de recursos. Es
 - Telefono
 - Categoría
 - El nombre del dueño
-
-✅ Ranking de los negocios por popularidad
 ✅ Vista pública tipo catálogo para mostrar todos los negocios  
+
+## 🚧 Funcionalidades que va a tener este proyecto, actualmente esta en desarrollo 🚧
+✅ Ranking de los negocios por popularidad
 🚧 Próximamente: módulo de facturación  
 
 ---
@@ -69,15 +70,9 @@ Este proyecto está bajo la siguiente licencia:
 
 ---
 
-## ✅ Estado del proyecto
+## 📌 Notas futuras
+Integración de pasarela de pago para cobrar la mensualidad desde la misma página.
 
-- CRUD: 
-    Create (Insertar negocio) ✅
-    Read (Listar negocios) ✅
-    Update (Editar negocio) en desarrollo 🔧
-    Delete pendiente ❌
+Limitación de funcionalidades según plan de suscripción.
 
-- Facturación: en desarrollo 🔧
-- Base de datos: funcional  
-- Backend: funcional en produccion 🚀
-- Frontend: completo excepto la edición de negocios y la facturación
+Mejoras de diseño y experiencia de usuario.

@@ -9,6 +9,7 @@ create table T_Admins(
   Fecha_Registro timestamp default current_timestamp,
   Estado BOOLEAN default true
 )
+ALTER TABLE t_admins ADD COLUMN id_usuario_supabase UUID;
 
 create table T_Categorias(
   CategoriaID serial primary key,

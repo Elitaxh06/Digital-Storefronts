@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 import { 
     listarAdmins,
     insertartAdmins,
@@ -13,6 +14,7 @@ import {
     desactivarActivarNegocio,
     updateTotalBusiness,
     getBusinessById,
+    subirImagenes
 } from "../controller/negocio.controller.js"
 const routes = Router()
 
@@ -35,5 +37,8 @@ routes.get("/listarNegocioByIdAdmin/:id", listarNegociosByIdAdmin)
 routes.post("/updateLogical", desactivarActivarNegocio)
 routes.put("/updateTotalBusiness/:id", updateTotalBusiness)
 routes.get("/listarNegocioById/:id", getBusinessById)
+
+const upload = multer( { storage: multer.memoryStorage() })
+routes.post("/uploadImage",upload.single("file"), subirImagenes)
 
 export default routes

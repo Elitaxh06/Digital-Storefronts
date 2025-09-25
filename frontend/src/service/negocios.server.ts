@@ -77,6 +77,41 @@ export const getNegocios = async (): Promise<ApiResponseBusiness | null> => {
     }
 }
 
+export const postUploadImages = async (file: File):Promise<string | null>  => {
+    try{
+        const formData = new FormData();
+        formData.append("file", file);
+        const { data } = await axios.post(
+            negociosRoutes.postUploadImage,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+        )
+
+        if (!data || !data.publicUrl) {
+            Swal.fire({
+                icon: "warning",
+                title: "Atención",
+                text: "No se obtuvo la URL de la imagen."
+            });
+            return null;
+        }
+
+        return data.publicUrl; // ✅ devuelve solo la URL
+
+    }catch(e){
+        Swal.fire({
+            icon: "info",
+            title: "Para su informacion",
+            text: "Error al subir la imagen. Por favor, refresque la pagína o intente más tarde"
+        })
+        return null
+    }
+}
+
 type BussinessInsertData = {
     nombre: string,
     descripcion: string,
@@ -110,6 +145,21 @@ export const insertBussiness = async ({
 }: BussinessInsertData): Promise<ApiResponseBusiness | null> => {
     const telefonoParseado = Number(telefono)
     const idCategoriaParseado = Number(idCategoria)
+        console.log({
+      nombre,
+      descripcion,
+      email,
+      telefono,
+      direccion,
+      redSocial1,
+      redSocial2,
+      p_img_url_1: imgUrl1,
+      p_img_url_2: imgUrl2,
+      p_img_url_3: imgUrl3,
+      idAdmin,
+      idCategoria,
+      estado: true
+    });
     try{
         const { data } = await axios.post<ApiResponseBusiness | null>(
             negociosRoutes.insertNegocio,
@@ -219,7 +269,7 @@ export const updateLogicalBusiness = async ({id, estado}: {id: number, estado: b
                 }
             }
         )
-        debugger
+        // debugger
         if(!data) return null
         if(data.resultadoTipo === 'success'){
             Swal.fire({
@@ -301,7 +351,7 @@ export const updateTotalBusiness = async (params: UpdateTotalBusinessParams): Pr
                 }
             }
         )
-        debugger
+        // debugger
         if(!data) return null
         if(data.resultadoTipo === 'success'){
             Swal.fire({

@@ -32,9 +32,6 @@ begin
 end;
 $$ language plpgsql;
 
-select * from insertar_admin('Esteban', 'Pizarro', 'eliaspizarro11@gmail.com', 83745485, true)
-
-
 create or replace function insertar_categoria(
   p_nombre varchar,
   p_estado boolean default true
@@ -65,10 +62,6 @@ begin
 end;
 $$ language plpgsql;
 
-
-select * from insertar_categoria('Tecnología')
-
-select * from t_categorias
 
 DROP FUNCTION IF EXISTS insertar_negocio(
   varchar,

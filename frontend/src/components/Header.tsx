@@ -20,7 +20,7 @@ function Header() {
         </div>
         <nav>
             <ul className='hidden md:flex space-x-6 gap-3'>
-              <HashLink smooth to="/#inicio" className='hover:text-orange-500'>Inicio</HashLink>
+              <HashLink smooth to="/#herosection" className='hover:text-orange-500'>Inicio</HashLink>
               <HashLink smooth to="/#negocios" className='hover:text-orange-500'>Explorar</HashLink>
               <HashLink smooth to="/#contacto" className='hover:text-orange-500'>Contacto</HashLink>
               <HashLink smooth to="/dashboard" className='hover:text-orange-500'>Panel de Administrador</HashLink>
@@ -48,7 +48,7 @@ function Header() {
          {/* Menú móvil */}
         {isMobilOpen && (
           <nav className="md:hidden absolute top-16 left-0 w-full bg-white border-t border-gray-200 px-4 py-4 space-y-3 shadow-md z-40">
-            <HashLink smooth to="/#negocios" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Inicio</HashLink>
+            <HashLink smooth to="/#herosection" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Inicio</HashLink>
             <HashLink smooth to="/#negocios" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Explorar</HashLink>
             <HashLink smooth to="/#contacto" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Contacto</HashLink>
             <HashLink smooth to="/dashboard" onClick={() => setIsMobilOpen(false)} className="block text-gray-700 hover:text-orange-600">Panel de Administrador</HashLink>

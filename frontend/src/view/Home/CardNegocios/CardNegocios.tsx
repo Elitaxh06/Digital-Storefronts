@@ -95,7 +95,7 @@ function CardNegocios() {
                                 {filteredResults.slice(0, mostratCantidad).map((business: Business) => (
                                     <div key={business.id ?? business.negocioid} className="bg-white pr-2 pl-2 mb-10 shadow-md flex flex-col h-full mx-2 rounded-lg hover:-translate-y-2 hover:shadow-2xl       transition-transform duration-200 hover:text-orange-500">
                                             <div className="flex flex-col">
-                                                <div className="relative">
+                                                <div className="relative" >
                                                     <img src={business.img_url_1} alt={`Imagen de la tienda ${business.nombre}`} className="object-cover h-48 rounded-t-lg w-full" />
                                                     <div className="absolute inset-0 bg- bg-opacity-50 flex justify-start items-start">
                                                         <p className="bg-slate-200 text-black text-sm rounded-xl py-1 px-2">{business.nombre_categoria}</p>

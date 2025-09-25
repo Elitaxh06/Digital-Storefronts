@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { updateTotalBusiness } from "../../../service/negocios.server"
+import { postUploadImages, updateTotalBusiness } from "../../../service/negocios.server"
+
 import Swal from "sweetalert2"
 import { useSelector } from "react-redux"
 
@@ -149,7 +150,7 @@ function FormEditBusiness() {
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Red Social 1 *</label>
+        <label className="font-semibold">Instagram*</label>
         <input
           type="text"
           name="p_red_social_1"
@@ -158,7 +159,7 @@ function FormEditBusiness() {
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        <label className="font-semibold">Red Social 2 *</label>
+        <label className="font-semibold">Facebook*</label>
         <input
           type="text"
           name="p_red_social_2"
@@ -169,30 +170,72 @@ function FormEditBusiness() {
 
         <label className="font-semibold">Imagen 1 *</label>
         <input
-          type="text"
-          name="p_img_url_1"
-          value={form.p_img_url_1}
-          onChange={handleChange}
+          type="file"
+          accept="image/*"
+          onChange={async (e) => {
+            const file = e.target.files?.[0]
+            if(file){
+              const url = await postUploadImages(file)
+              if(url){
+                setForm((prev) => ({...prev, p_img_url_1: url}))
+              }
+            }
+          }}
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
+
+        {form.p_img_url_1 && (
+          <img src={form.p_img_url_1}
+            alt="Imagen 1"
+            className="mt-2 w-32 h-32 object-cover rounded"
+          />
+        )}
 
         <label className="font-semibold">Imagen 2 (opcional)</label>
         <input
-          type="text"
-          name="p_img_url_2"
-          value={form.p_img_url_2}
-          onChange={handleChange}
+          type="file"
+          accept="image/*"
+          onChange={async (e) => {
+            const file = e.target.files?.[0]
+            if(file){
+              const url = await postUploadImages(file)
+              if(url){
+                setForm((prev) => ({...prev, p_img_url_2: url}))
+              }
+            }
+          }}
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
+        {form.p_img_url_2 && (
+          <img src={form.p_img_url_2}
+            alt="Imagen 2"
+            className="mt-2 w-32 h-32 object-cover rounded"
+          />
+        )}
+
         <label className="font-semibold">Imagen 3 (opcional)</label>
         <input
-          type="text"
-          name="p_img_url_3"
-          value={form.p_img_url_3}
-          onChange={handleChange}
+          type="file"
+          accept="image/*"
+          onChange={async (e) => {
+            const file = e.target.files?.[0]
+            if(file){
+              const url = await postUploadImages(file)
+              if(url){
+                setForm((prev) => ({...prev, p_img_url_3: url}))
+              }
+            }
+          }}
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
+
+        {form.p_img_url_3 && (
+          <img src={form.p_img_url_3}
+            alt="Imagen 3"
+            className="mt-2 w-32 h-32 object-cover rounded"
+          />
+        )}
 
         <div className="flex items-center gap-2">
           <label className="font-semibold">Activo</label>

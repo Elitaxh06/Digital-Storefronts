@@ -4,6 +4,7 @@ import ClientesSVG from "../../../components/SVGS/ClienteSVG"
 import CrecimientoSVG from "../../../components/SVGS/CrecimientoSVG"
 import ApoyoSVG from "../../../components/SVGS/ApoyoSVG"
 import FadeInSection from "../../../components/FadeInSection"
+import { Link } from "react-router-dom"
 type TypeCTA = {
     logoSvg: React.ReactNode
     titulo: string,
@@ -34,16 +35,16 @@ function CTARegistrarNegocio() {
             <FadeInSection>
                 <h1 className="text-5xl font-bold">¿Tienes un Negocio?</h1>
                 <p className="text-slate-600 text-lg mt-4">Únete a tiendaticaCR y lleva tu negocio al mundo digital. Te ayudamos a conectar con más clientes y hacer crecer tu emprendimiento.</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-8 mb-8">
                     <CardsCTA logoSvg={<TiendaSVG />} titulo="Presencia Online" texto="Crea tu perfil digital y muestra tus productos o servicios" style="bg-orange-200"/>
                     <CardsCTA logoSvg={<ClientesSVG />} titulo="Más Clientes" texto="Conecta con nuevos clientes en tu comunidad"                  style="bg-pink-200"/>
                     <CardsCTA logoSvg={<CrecimientoSVG />} titulo="Crecimiento" texto="Impulsa las ventas y el reconocimiento de tu marca"         style="bg-green-200"/>
                     <CardsCTA logoSvg={<ApoyoSVG />} titulo="Apoyo Local" texto="Forma parte de una comunidad que apoya lo local"                  style="bg-purple-300"/>
 
                 </div>
-                <button className="bg-orange-600 text-white rounded-md px-6 py-3 mt-8 cursor-pointer hover:bg-orange-700 font-semibold hover:scale-105 transition-transform duration-200">
+                <Link to="/dashboard" className="bg-orange-600 text-white rounded-md px-6 py-3 cursor-pointer hover:bg-orange-700 font-semibold hover:scale-105 transition-transform duration-200">
                    Registrar mi Negocio
-                </button>
+                </Link >
                 <p className="text-slate-600 text-center mt-2">Contáctanos para más información</p>
             </FadeInSection>
         </section>
