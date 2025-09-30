@@ -3,8 +3,8 @@ import dotenv from "dotenv"
 dotenv.config()
 
 let Ambiente = ''
-// Ambiente = 'Local'
-Ambiente = 'Production'
+Ambiente = 'Local'
+// Ambiente = 'Production'
 
 let ruta_enpoints_admins = ''
 let ruta_enpoints_business = ''

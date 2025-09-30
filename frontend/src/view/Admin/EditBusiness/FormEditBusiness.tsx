@@ -29,6 +29,10 @@ function FormEditBusiness() {
     p_estado: true
   });
 
+  const [files, setFiles] = useState<{p_img_url_1?: File, p_img_url_2?: File, p_img_url_3?: File}>({})
+  const [previews, setPreviews] = useState<{p_img_url_1?: string, p_img_url_2?: string, p_img_url_3?: string}>({})
+
+
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target
     setForm(prev => ({
@@ -40,14 +44,7 @@ function FormEditBusiness() {
   const guardar = async (e: any) => {
     e.preventDefault()
     try {
-      if (
-        form.p_nombre === '' ||
-        form.p_descripcion === '' ||
-        form.p_email === '' ||
-        form.p_telefono === '' ||
-        form.p_direccion === '' ||
-        form.p_id_categoria === ''
-      ) {
+      if (  form.p_nombre === '' ||  form.p_descripcion === '' ||  form.p_email === '' ||  form.p_telefono === '' ||  form.p_direccion === '' ||  form.p_id_categoria === '') {
         Swal.fire({
           icon: 'info',
           title: 'Campos incompletos',
@@ -55,12 +52,18 @@ function FormEditBusiness() {
           confirmButtonText: 'Aceptar'
         })
         return
-      } else {
-        const result = await updateTotalBusiness(form)
-        if (result) {
-          navigate("/")
-        }
       }
+      const uploaded: any = {}
+      if(files.p_img_url_1) uploaded.p_img_url_1 = await postUploadImages(files.p_img_url_1);
+      if(files.p_img_url_2) uploaded.p_img_url_2 = await postUploadImages(files.p_img_url_2);
+      if(files.p_img_url_3) uploaded.p_img_url_3 = await postUploadImages(files.p_img_url_3);
+
+      const finalForm = { ...form, ...uploaded };
+      const result = await updateTotalBusiness(finalForm);
+      
+      if(result){
+      navigate("/");
+    }
     } catch (e) {
       console.log(e)
       Swal.fire({
@@ -175,20 +178,30 @@ function FormEditBusiness() {
           onChange={async (e) => {
             const file = e.target.files?.[0]
             if(file){
-              const url = await postUploadImages(file)
-              if(url){
-                setForm((prev) => ({...prev, p_img_url_1: url}))
-              }
+              setFiles(prev => ({ ...prev, p_img_url_1: file }));
+              setPreviews(prev => ({ ...prev, p_img_url_1: URL.createObjectURL(file) }));
             }
           }}
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        {form.p_img_url_1 && (
-          <img src={form.p_img_url_1}
-            alt="Imagen 1"
-            className="mt-2 w-32 h-32 object-cover rounded"
-          />
+        {(previews.p_img_url_1 || form.p_img_url_1) && (
+          <div>
+            <img src={previews.p_img_url_1 || form.p_img_url_1}
+              alt="Imagen 1"
+              className="mt-2 w-32 h-32 object-cover rounded"
+              />
+              <button
+                className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-400 transition cursor-pointer"
+                type="button"
+                onClick={() => {
+                  setFiles(prev => ({ ...prev, p_img_url_1: undefined }));
+                  setPreviews(prev => ({ ...prev, p_img_url_1: '' }));
+              }}
+              >
+                Quitar imagen
+            </button>
+          </div>
         )}
 
         <label className="font-semibold">Imagen 2 (opcional)</label>
@@ -198,20 +211,30 @@ function FormEditBusiness() {
           onChange={async (e) => {
             const file = e.target.files?.[0]
             if(file){
-              const url = await postUploadImages(file)
-              if(url){
-                setForm((prev) => ({...prev, p_img_url_2: url}))
-              }
+              setFiles(prev => ({ ...prev, p_img_url_2: file }));
+              setPreviews(prev => ({ ...prev, p_img_url_2: URL.createObjectURL(file) }));
             }
           }}
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        {form.p_img_url_2 && (
-          <img src={form.p_img_url_2}
-            alt="Imagen 2"
-            className="mt-2 w-32 h-32 object-cover rounded"
-          />
+        {(previews.p_img_url_2 || form.p_img_url_2) && (
+          <div className="mt-2 flex flex-col items-start gap-2">
+              <img src={previews.p_img_url_2 || form.p_img_url_2}
+                alt="Imagen 2"
+                className="mt-2 w-32 h-32 object-cover rounded"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFiles(prev => ({ ...prev, p_img_url_2: undefined }));
+                    setPreviews(prev => ({ ...prev, p_img_url_2: '' }));
+                  }}
+                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-400 transition cursor-pointer"
+                >
+                  Quitar imagen
+                </button>
+          </div>
         )}
 
         <label className="font-semibold">Imagen 3 (opcional)</label>
@@ -221,20 +244,30 @@ function FormEditBusiness() {
           onChange={async (e) => {
             const file = e.target.files?.[0]
             if(file){
-              const url = await postUploadImages(file)
-              if(url){
-                setForm((prev) => ({...prev, p_img_url_3: url}))
-              }
+              setFiles(prev => ({ ...prev, p_img_url_3: file }));
+              setPreviews(prev => ({ ...prev, p_img_url_3: URL.createObjectURL(file) }));
             }
           }}
           className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
 
-        {form.p_img_url_3 && (
-          <img src={form.p_img_url_3}
-            alt="Imagen 3"
-            className="mt-2 w-32 h-32 object-cover rounded"
-          />
+        {(form.p_img_url_3 || previews.p_img_url_3) && (
+          <div>
+            <img src={previews.p_img_url_3 || form.p_img_url_3}
+              alt="Imagen 3"
+              className="mt-2 w-32 h-32 object-cover rounded"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setFiles(prev => ({ ...prev, p_img_url_3: undefined }));
+                  setPreviews(prev => ({ ...prev, p_img_url_3: '' }));
+                }}
+                className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-400 transition cursor-pointer"
+              >
+                Quitar imagen
+              </button>
+          </div>
         )}
 
         <div className="flex items-center gap-2">
